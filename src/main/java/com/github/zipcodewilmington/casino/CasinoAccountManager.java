@@ -10,10 +10,18 @@ import java.util.HashMap;
  */
 public class CasinoAccountManager extends CasinoAccount{
     private HashMap<String,CasinoAccount> accountMap;
-
+    private final String fileName = "accountDB.txt";
     public CasinoAccountManager(){
         accountMap = new HashMap<>();
         getAllAccounts();
+    }
+
+    public HashMap<String, CasinoAccount> getAccountMap() {
+        return accountMap;
+    }
+
+    public void setAccountMap(HashMap<String, CasinoAccount> accountMap) {
+        this.accountMap = accountMap;
     }
 
     public void getAllAccounts(){
@@ -60,6 +68,8 @@ public class CasinoAccountManager extends CasinoAccount{
     public CasinoAccount createAccount(String accountName, String accountPassword) {
         return new CasinoAccount(accountName,accountPassword);
     }
+
+
     public boolean checkAccountName(String accountName){
         // return true if account name already exist
         return accountMap.containsKey(accountName);

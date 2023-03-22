@@ -24,12 +24,20 @@ public class Casino implements Runnable {
         accountManager = new CasinoAccountManager();
     }
 
+    public CasinoAccountManager getAccountManager() {
+        return accountManager;
+    }
+
+    public void setAccountManager(CasinoAccountManager accountManager) {
+        this.accountManager = accountManager;
+    }
+
     @Override
     public void run() {
         boolean isInCasino = true;
 
         // print welcome message
-        welcomeMessage();
+        console.println(welcomeMessage());
 
         // run the casino until exit
         while(isInCasino){
@@ -39,6 +47,7 @@ public class Casino implements Runnable {
 
             // check for selection and execute
             switch(mainMenuOption){
+
                 //create an account
                 case 1:
                     if(currentAccount==null) {
@@ -141,11 +150,11 @@ public class Casino implements Runnable {
 //        } while (!"logout".equals(arcadeDashBoardInput));
     }
 
-    private void welcomeMessage() {
-        console.println(new StringBuilder()
+    private String welcomeMessage() {
+        return new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .toString());
+                .toString();
     }
 
     private Integer lobbyMenu(){
@@ -187,7 +196,12 @@ public class Casino implements Runnable {
             String accountName = console.getStringInput("Enter your account name:");
             // if name not already in DB
             if(!accountManager.checkAccountName(accountName)){
-                errorConsole.println("Account name is not recognized! Please try again.");
+                errorConsole.println("Account name is not recognized!");
+                String createAcc = console.getStringInput("Do you want to create a new account? (Y|N)");
+                if(createAcc.equals("Y")){
+                    createNewAccount();
+                    return;
+                }
                 continue;
             }
             String password = console.getStringInput("Enter your password:");
