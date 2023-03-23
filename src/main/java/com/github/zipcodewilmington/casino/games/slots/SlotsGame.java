@@ -30,20 +30,16 @@ public class SlotsGame extends Game {
             h = getSlotRoll();
             j = getSlotRoll();
             x = outcome[a];
-            x1 = outcome[b];
-            x2 = outcome[c];
+//            x1 = outcome[b];
+//            x2 = outcome[c];
             y = outcome[d];
-            y1 = outcome[e];
-            y2 = outcome[f];
+//            y1 = outcome[e];
+//            y2 = outcome[f];
             z = outcome[g];
-            z1 = outcome[h];
-            z2 = outcome[j];
-            System.out.printf("[  " + "  %s  " + "  :  " + "  %s  " + "  :  " + "  %s  " +   "]\r\n", x,y,z);
-            Thread.sleep(600);
-            System.out.printf("[  " + "  %s  " + "  :  " + "  %s  " + "  :  " + "  %s  " +   "]\r", x1,y1,z1);
-            Thread.sleep(600);
-            System.out.printf("[  " + "  %s  " + "  :  " + "  %s  " + "  :  " + "  %s  " +   "]\r", x2, y2, z2);
-            Thread.sleep(600);
+//            z1 = outcome[h];
+//            z2 = outcome[j];
+            System.out.printf("[  " + "  %s  " + "  :  " + "  %s  " + "  :  " + "  %s  " +   "]\r", x,y,z);
+            Thread.sleep(120);
         }
         return null;
     }
