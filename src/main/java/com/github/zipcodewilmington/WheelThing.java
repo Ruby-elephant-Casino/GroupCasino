@@ -3,8 +3,14 @@ package com.github.zipcodewilmington;
 import java.util.Random;
 
 public class WheelThing {
-//    public int numberGenerator(int lowerBound, int upperBound){
-//        Random rand = new Random();
-//        return rand.nextInt(upperBound-lowerBound)+lowerBound;
-//    }
+    private Random random;
+
+    public void Wheel() {
+        random = new Random();
+    }
+
+    public int spin(int min, int max) {
+        int result = random.nextInt((max - min) + 1) + min;
+        return result;
+    }
 }

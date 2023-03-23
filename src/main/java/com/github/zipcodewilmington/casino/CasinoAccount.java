@@ -11,14 +11,10 @@ public class CasinoAccount {
     private Double balance;
 
     public CasinoAccount(){
-        this.name = "bot";
-        this.password = "bot";
-        this.balance = 0.0;
+        this("bot","bot",0.0);
     }
     public CasinoAccount(String name, String password){
-        this.name = name;
-        this.password = password;
-        this.balance = 0.0;
+        this(name,password,0.0);
     }
     public CasinoAccount(String name, String password, Double balance){
         this.name = name;

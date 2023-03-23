@@ -1,0 +1,2 @@
+whitwhit,whitpass,0.0
+whitney,whitney,7000.0
