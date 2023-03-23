@@ -1,10 +1,12 @@
 package com.github.zipcodewilmington.casino.games.wheelof6;
 
+import com.github.zipcodewilmington.casino.Game;
+import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.gameTools.WheelThing;
 
 import java.util.Scanner;
 
-public class WheelOfSixGame {
+public class WheelOfSixGame extends Game {
     private WheelThing wheel;
     private Scanner scanner;
 
@@ -78,5 +80,30 @@ public class WheelOfSixGame {
 
     public int getPayout(String s, int i) {
         return i;
+    }
+
+    @Override
+    public void remove(Player player) {
+
+    }
+
+    @Override
+    public void run() throws InterruptedException {
+
+    }
+
+    @Override
+    public Player add(Player player) {
+        return null;
+    }
+
+    @Override
+    public Player removePlayer(Player player) {
+        return null;
+    }
+
+    @Override
+    public void startGame() {
+
     }
 }

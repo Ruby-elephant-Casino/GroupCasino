@@ -9,13 +9,17 @@ public class WheelThing {
 
     private Random random;
 
-    public void Wheel() {
+    public void Wheel(String[] wheelSlots) {
         random = new Random();
     }
 
     public int spin(int min, int max) {
         int result = random.nextInt((max - min) + 1) + min;
         return result;
+    }
+
+    public String spin() {
+        return null;
     }
 }
 

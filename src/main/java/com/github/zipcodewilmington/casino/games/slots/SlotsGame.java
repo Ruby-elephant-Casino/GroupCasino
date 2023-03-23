@@ -100,8 +100,4 @@ public class SlotsGame extends Game {
 
     }
 
-    @Override
-    public void startGame() {
-
-    }
 }
