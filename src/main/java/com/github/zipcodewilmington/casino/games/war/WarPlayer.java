@@ -13,7 +13,7 @@ public class WarPlayer extends Player {
 
 
     @Override
-    protected Double checkBalance() {
+    public Double checkBalance() {
         return null;
     }
 
