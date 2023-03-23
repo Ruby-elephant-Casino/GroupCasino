@@ -9,15 +9,10 @@ public class WarPlayer extends Player {
     public WarPlayer(CasinoAccount playerAccount) {
         super(playerAccount);
     }
-    @Override
-    protected void run() {
-
-
-    }
 
     @Override
     protected Double checkBalance() {
-        return WarPlayer.getPlayerAccount().getBalance();
+        return null;
     }
 
 }

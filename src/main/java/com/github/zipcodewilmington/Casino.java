@@ -1,10 +1,18 @@
 package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
+import com.github.zipcodewilmington.casino.games.war.WarGame;
+import com.github.zipcodewilmington.casino.games.war.WarPlayer;
+import com.github.zipcodewilmington.casino.games.wheelof6.WheelOf6Game;
+import com.github.zipcodewilmington.casino.games.wheelof6.WheelOf6Player;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -290,18 +298,38 @@ public class Casino implements Runnable {
                     break;
                 case 2:
                     try {
-                        play(new RouletteGame(), new RoulettePlayer(currentAccount));
+                        play(new NumberGuessGame(), new NumberGuessPlayer(currentAccount));
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     break;
                 case 3:
+                    try {
+                        play(new RouletteGame(), new RoulettePlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 4:
+                    try {
+                        play(new BlackJackGame(), new BlackJackPlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 5:
+                    try {
+                        play(new WheelOf6Game(), new WheelOf6Player(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 6:
+                    try {
+                        play(new WarGame(), new WarPlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 7:
                     isGettingGame = false;

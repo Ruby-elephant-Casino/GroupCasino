@@ -23,4 +23,9 @@ public class BlackJackGame extends Game {
     public Player removePlayer(Player player) {
         return null;
     }
+
+    @Override
+    public void startGame() {
+
+    }
 }
