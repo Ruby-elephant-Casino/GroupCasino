@@ -1,7 +1,23 @@
 package com.github.zipcodewilmington.utils;
 
-public class Card {
-    public enum Suit{DIAMONDS, HEARTS, CLUBS, SPADES;}
+import com.github.zipcodewilmington.casino.gameTools.Rank;
+import com.github.zipcodewilmington.casino.gameTools.Suit;
 
-    public enum Rank{ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING}
+public class Card {
+    Suit suit;
+    Rank rank;
+    public Card(Suit s, Rank r){
+        this.suit = s;
+        this.rank = r;
+    }
+
+    public Suit getSuit(){
+        return this.suit;
+    }
+
+    public Rank getRank() {
+        return this.rank;
+    }
+
+
 }

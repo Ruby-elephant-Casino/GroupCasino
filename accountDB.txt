@@ -1,2 +1,1 @@
 whitwhit,whitpass,0.0
-whitney,passwordhehe,10000.0

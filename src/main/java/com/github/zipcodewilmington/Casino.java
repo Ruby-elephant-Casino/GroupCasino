@@ -1,11 +1,18 @@
 package com.github.zipcodewilmington;
 
-import com.github.zipcodewilmington.casino.CasinoAccount;
-import com.github.zipcodewilmington.casino.CasinoAccountManager;
-import com.github.zipcodewilmington.casino.GameInterface;
-import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackGame;
+import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
+import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
+import com.github.zipcodewilmington.casino.games.war.WarGame;
+import com.github.zipcodewilmington.casino.games.war.WarPlayer;
+import com.github.zipcodewilmington.casino.games.wheelof6.WheelOf6Game;
+import com.github.zipcodewilmington.casino.games.wheelof6.WheelOf6Player;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -13,17 +20,21 @@ import com.github.zipcodewilmington.utils.IOConsole;
  * Created by leon on 7/21/2020.
  */
 public class Casino implements Runnable {
+    // all consoles
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
     private final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
     private final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
 
+    // fields of acccount and accoutManager
     private CasinoAccountManager accountManager;
     private CasinoAccount currentAccount = null;
 
+    // constructor
     public Casino(){
         accountManager = new CasinoAccountManager();
     }
 
+    // getters and setters
     public CasinoAccountManager getAccountManager() {
         return accountManager;
     }
@@ -31,6 +42,7 @@ public class Casino implements Runnable {
     public void setAccountManager(CasinoAccountManager accountManager) {
         this.accountManager = accountManager;
     }
+
 
     @Override
     public void run() {
@@ -79,6 +91,7 @@ public class Casino implements Runnable {
                 case 4:
                     if(currentAccount!=null){
                         // call games menu
+                        getGame();
                     }else {
                         errorConsole.println("Please log in before execute this option");
                     }
@@ -197,19 +210,24 @@ public class Casino implements Runnable {
             // if name not already in DB
             if(!accountManager.checkAccountName(accountName)){
                 errorConsole.println("Account name is not recognized!");
-                String createAcc = console.getStringInput("Do you want to create a new account? (Y|N)");
-                if(createAcc.equals("Y")){
+                String createAcc = console.getStringInput("Do you want to create a new account? (Y | N | retry) : ");
+                if(createAcc.equalsIgnoreCase("Y")){
                     createNewAccount();
+                    return;
+                } else if(createAcc.equalsIgnoreCase("N")){
+                    successConsole.println("You are directed back to the main menu!");
                     return;
                 }
                 continue;
             }
             String password = console.getStringInput("Enter your password:");
             if(accountManager.checkAccount(accountName,password)){
-                CasinoAccount account = accountManager.createAccount(accountName, password);
-                accountManager.registerAccount(account);
+                CasinoAccount account = accountManager.getAccount(accountName, password);
                 currentAccount = account;
                 successConsole.println("Account logged in successfully!");
+                successConsole.println(String.format("Hello %s, you have %.2f in your account!",
+                        currentAccount.getName().toUpperCase(),
+                        currentAccount.getBalance()));
                 break;
             }
             errorConsole.println("Password is incorrect, please try again!");
@@ -219,12 +237,13 @@ public class Casino implements Runnable {
     private void showBalance(){
         boolean isInBalanceMenu = true;
         while(isInBalanceMenu){
+            System.out.println(currentAccount.getBalance());
             successConsole.println("Your current balance is %.2f ",currentAccount.getBalance());
             Integer option = balanceMenu();
             switch (option){
                 case 1:
-                    Double depAmount = console.getDoubleInput("Enter the amount you want to deposit:");
-                    if(depAmount > 0 && depAmount < 20000){
+                    Double depAmount = console.getDoubleInput("Enter the amount you want to deposit (0 - 20000):");
+                    if(depAmount >= 0 && depAmount <= 20000){
                         currentAccount.deposit(depAmount);
                         successConsole.println("Deposit successful!");
                     } else {
@@ -264,24 +283,53 @@ public class Casino implements Runnable {
                 .toString());
     }
 
-    private String getGame() {
+    private void getGame() {
         boolean isGettingGame = true;
         console.println("Welcome to the Game Selection Dashboard!");
         while(isGettingGame){
             Integer option = gameMenu();
             switch (option){
                 case 1: //slots game
-                    play(new SlotsGame(), new SlotsPlayer());
+                    try {
+                        play(new SlotsGame(), new SlotsPlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        //throw new RuntimeException(e);
+                    }
                     break;
                 case 2:
+                    try {
+                        play(new NumberGuessGame(), new NumberGuessPlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 3:
+                    try {
+                        play(new RouletteGame(), new RoulettePlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 4:
+                    try {
+                        play(new BlackJackGame(), new BlackJackPlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 5:
+                    try {
+                        play(new WheelOf6Game(), new WheelOf6Player(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 6:
+                    try {
+                        play(new WarGame(), new WarPlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 7:
                     isGettingGame = false;
@@ -290,11 +338,6 @@ public class Casino implements Runnable {
                     errorConsole.println("Please select from given options only!");
             }
         }
-        return console.getStringInput(new StringBuilder()
-                .append("Welcome to the Game Selection Dashboard!")
-                .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ]")
-                .toString());
     }
 
     private Integer gameMenu(){
@@ -308,14 +351,14 @@ public class Casino implements Runnable {
                 .append("|  4. Black Jack        |\n")
                 .append("|  5. Wheel of 6        |\n")
                 .append("|  6. War (non-betting) |\n")
-                .append("|  7. Exit to main menu |\n")
+                .append("|  7. Go to main menu   |\n")
                 .append("+-----------------------+\n")
                 .append("SELECT A NUMBER: ")
                 .toString());
     }
-    private void play(Object gameObject, Object playerObject) {
-        GameInterface game = (GameInterface)gameObject;
-        PlayerInterface player = (PlayerInterface)playerObject;
+    private void play(Object gameObject, Object playerObject) throws InterruptedException {
+        Game game = (Game) gameObject;
+        Player player = (Player) playerObject;
         game.add(player);
         game.run();
     }
