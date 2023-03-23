@@ -80,7 +80,7 @@ public class RouletteGame extends Game {
             System.out.println("4. Green 0 & 00 (pays 1 to 3)");
             int betType = scanner.nextInt();
 
-            int result = wheel.spin(0, 37); //spin wheel to get random number
+            int result = Integer.parseInt(wheel.spin()); //spin wheel to get random number
             String color= numberToColor.get(result); // get color of the number it lands on
             int payOut = 0;
 

@@ -3,6 +3,10 @@ package com.github.zipcodewilmington.casino.gameTools;
 import java.util.Random;
 
 public class WheelThing {
+
+
+    private String[] wheelSlots;
+
     private Random random;
 
     public void Wheel() {
