@@ -4,8 +4,8 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
 
-public class WheelOf6Player extends Player implements GamblingPlayer {
-    public WheelOf6Player(CasinoAccount playerAccount) {
+public class WheelOfSixPlayer extends Player implements GamblingPlayer {
+    public WheelOfSixPlayer(CasinoAccount playerAccount) {
         super(playerAccount);
     }
 

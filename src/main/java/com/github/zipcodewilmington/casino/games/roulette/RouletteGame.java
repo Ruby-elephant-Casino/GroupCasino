@@ -1,11 +1,10 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
-import com.github.zipcodewilmington.WheelThing;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
+import com.github.zipcodewilmington.casino.gameTools.WheelThing;
 
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,7 +80,7 @@ public class RouletteGame extends Game {
             System.out.println("4. Green 0 & 00 (pays 1 to 3)");
             int betType = scanner.nextInt();
 
-            int result = wheel.spin(0, 37); //spin wheel to get random number
+            int result = Integer.parseInt(wheel.spin()); //spin wheel to get random number
             String color= numberToColor.get(result); // get color of the number it lands on
             int payOut = 0;
 
@@ -152,6 +151,11 @@ public class RouletteGame extends Game {
     @Override
     public Player removePlayer(Player player) {
         return null;
+    }
+
+    @Override
+    public void startGame() {
+
     }
 
     @Override
