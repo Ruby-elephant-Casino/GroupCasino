@@ -15,8 +15,10 @@ public class WarPlayer extends Player {
         super(playerAccount);
     }
 
+
     public Card getCurrentCard() {
         return this.currentCard;
+
     }
 
     public void setCurrentCard(Card card){

@@ -13,7 +13,7 @@ public class NumberGuessPlayer extends Player implements GamblingPlayer {
     }
 
     @Override
-    protected Double checkBalance() {
+    public Double checkBalance() {
         return super.getPlayerAccount().getBalance();
     }
 
@@ -25,18 +25,4 @@ public class NumberGuessPlayer extends Player implements GamblingPlayer {
         return -1.0;
     }
 
-    @Override
-    public void makeBet() {
-
-    }
-
-    @Override
-    public void checkBet() {
-
-    }
-
-    @Override
-    public boolean bettable() {
-        return false;
-    }
 }
