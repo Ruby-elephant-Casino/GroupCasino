@@ -12,6 +12,8 @@ public class WarDealerPlayer implements Dealer {
     CardDeck cardDeck = new CardDeck();
     Queue<Card> warDeck;
 
+
+
     public Card nextCard(){
 
         return null;

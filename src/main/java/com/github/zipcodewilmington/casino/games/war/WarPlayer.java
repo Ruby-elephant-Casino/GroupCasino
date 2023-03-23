@@ -5,28 +5,19 @@ import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
 
 public class WarPlayer extends Player {
-
+    WarGame warGame = new WarGame();
     public WarPlayer(CasinoAccount playerAccount) {
         super(playerAccount);
     }
-
     @Override
     protected void run() {
+
 
     }
 
     @Override
     protected Double checkBalance() {
-        return null;
+        return WarPlayer.getPlayerAccount().getBalance();
     }
 
-    @Override
-    protected Double exitGame() {
-        return null;
-    }
-
-    @Override
-    protected Double startGame() {
-        return null;
-    }
 }

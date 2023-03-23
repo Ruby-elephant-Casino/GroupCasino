@@ -11,6 +11,10 @@ public class WarGame extends Game {
 
     @Override
     public void run() throws InterruptedException {
+        boolean isRunning = true;
+        while(isRunning){
+
+        }
 
     }
 

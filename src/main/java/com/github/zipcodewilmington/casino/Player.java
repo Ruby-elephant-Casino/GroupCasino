@@ -11,8 +11,5 @@ public abstract class Player {
 
     protected abstract Double checkBalance();
 
-    protected abstract Double exitGame();
-
-    protected abstract Double startGame();
 
 }
