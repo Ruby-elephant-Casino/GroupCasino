@@ -1,6 +1,8 @@
 package com.github.zipcodewilmington;
 
 import com.github.zipcodewilmington.casino.*;
+import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
+import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -287,6 +289,11 @@ public class Casino implements Runnable {
                     }
                     break;
                 case 2:
+                    try {
+                        play(new RouletteGame(), new RoulettePlayer(currentAccount));
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case 3:
                     break;

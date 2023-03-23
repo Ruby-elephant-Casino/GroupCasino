@@ -43,6 +43,12 @@ public class SlotsGame extends Game {
         }
         return null;
     }
+
+    @Override
+    public void remove(Player player) {
+
+    }
+
     public void run() {
         try{
             String pullSlot = pullSlots();
@@ -56,5 +62,10 @@ public class SlotsGame extends Game {
     public Player add(Player player) {
         this.currentPlayer = player;
         return currentPlayer;
+    }
+
+    @Override
+    public Player removePlayer(Player player) {
+        return null;
     }
 }

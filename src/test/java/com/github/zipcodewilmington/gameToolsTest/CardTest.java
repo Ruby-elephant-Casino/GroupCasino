@@ -1,5 +1,9 @@
 package com.github.zipcodewilmington.gameToolsTest;
 
+
+import com.github.zipcodewilmington.casino.gameTools.Rank;
+import com.github.zipcodewilmington.casino.gameTools.Suit;
+import com.github.zipcodewilmington.utils.Card;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,24 +12,24 @@ public class CardTest {
     @Test
     public void createCardSuitTest(){
         //given
-
         //when
-        //Enum expectedSuit = DIAMONDS;
-        //Enum expectedRank = null;
-        //Enum actualSuit = createDeck(expectedSuit, expectedRank).suit;
+        Suit expectedSuit = Suit.DIAMONDS;
+        Rank expectedRank = Rank.ACE;
+        Card card = new Card(expectedSuit, expectedRank);
+        Suit actualSuit = card.getSuit();
         //then
-        //Assert.assertEquals(expectedRank, actualRank);
+        Assert.assertEquals(expectedSuit, actualSuit);
     }
     //test to see if a card gets a rank value
     @Test
     public void createCardRankTest(){
         //given
-
         //when
-        //Enum expectedSuit = null;
-        //Enum expectedRank = ACE;
-        //Enum actualRank = createDeck(expectedSuit, expectedRank).rank;
+        Suit expectedSuit = Suit.DIAMONDS;
+        Rank expectedRank = Rank.ACE;
+        Card card = new Card(expectedSuit, expectedRank);
+        Rank actualRank = card.getRank();
         //then
-        //Assert.assertEquals(expectedRank, actualRank);
+        Assert.assertEquals(expectedRank, actualRank);
     }
 }

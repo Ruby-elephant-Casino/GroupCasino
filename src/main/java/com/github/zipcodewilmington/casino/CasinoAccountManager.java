@@ -8,9 +8,8 @@ import java.util.HashMap;
  * `ArcadeAccountManager` stores, manages, and retrieves `ArcadeAccount` objects
  * it is advised that every instruction in this class is logged
  */
-public class CasinoAccountManager extends CasinoAccount{
+public class CasinoAccountManager {
     private HashMap<String,CasinoAccount> accountMap;
-    private final String fileName = "accountDB.txt";
     public CasinoAccountManager(){
         accountMap = new HashMap<>();
         getAllAccounts();
