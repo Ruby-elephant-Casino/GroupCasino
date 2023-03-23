@@ -198,7 +198,7 @@ public class Casino implements Runnable {
             String password = console.getStringInput("Enter your password:");
             CasinoAccount account = accountManager.createAccount(accountName, password);
             accountManager.registerAccount(account);
-            successConsole.println("Account created successfully! Sending you back to the main menu!");
+            successConsole.println("Account created successfully with balance of $0! Sending you back to the main menu!");
             break;
         }
     }
@@ -234,54 +234,54 @@ public class Casino implements Runnable {
         }
     }
 
-    private void showBalance(){
-        boolean isInBalanceMenu = true;
-        while(isInBalanceMenu){
-            System.out.println(currentAccount.getBalance());
-            successConsole.println("Your current balance is %.2f ",currentAccount.getBalance());
-            Integer option = balanceMenu();
-            switch (option){
-                case 1:
-                    Double depAmount = console.getDoubleInput("Enter the amount you want to deposit (0 - 20000):");
-                    if(depAmount >= 0 && depAmount <= 20000){
-                        currentAccount.deposit(depAmount);
-                        successConsole.println("Deposit successful!");
-                    } else {
-                        errorConsole.println("Invalid amount, amount should be 1 - 20000!");
-                    }
-                    break;
-                case 2:
-                    Double withdrawAmount = console.getDoubleInput("Enter the amount you want to withdraw:");
-                    if(withdrawAmount < 0 ){
-                        errorConsole.println("Invalid amount, amount cannot be negative!");
-                    }else if(withdrawAmount > currentAccount.getBalance()){
-                        errorConsole.println("Invalid amount, amount cannot exceed current balance!");
-                    } else {
-                        currentAccount.withdraw(withdrawAmount);
-                        successConsole.println("Withdraw successfully!");
-                    }
-                    break;
-                case 3:
-                    isInBalanceMenu = false;
-                    break;
-                default:
-                    errorConsole.println("Please select from given options only!");
-            }
-        }
-    }
-
-    private Integer balanceMenu(){
-        return console.getIntegerInput(new StringBuilder()
-                .append("+-------------------------------+\n")
-                .append("|      ACCOUNT BALANCE MENU     |\n")
-                .append("+-------------------------------+\n")
-                .append("|  1. Deposit                   |\n")
-                .append("|  2. Withdraw                  |\n")
-                .append("|  3. Exit to main menu         |\n")
-                .append("+-------------------------------+\n")
-                .append("SELECT A NUMBER: ")
-                .toString());
-    }
+//    private void showBalance(){
+//        boolean isInBalanceMenu = true;
+//        while(isInBalanceMenu){
+//            System.out.println(currentAccount.getBalance());
+//            successConsole.println("Your current balance is %.2f ",currentAccount.getBalance());
+//            Integer option = balanceMenu();
+//            switch (option){
+//                case 1:
+//                    Double depAmount = console.getDoubleInput("Enter the amount you want to deposit (0 - 20000):");
+//                    if(depAmount >= 0 && depAmount <= 20000){
+//                        currentAccount.deposit(depAmount);
+//                        successConsole.println("Deposit successful!");
+//                    } else {
+//                        errorConsole.println("Invalid amount, amount should be 1 - 20000!");
+//                    }
+//                    break;
+//                case 2:
+//                    Double withdrawAmount = console.getDoubleInput("Enter the amount you want to withdraw:");
+//                    if(withdrawAmount < 0 ){
+//                        errorConsole.println("Invalid amount, amount cannot be negative!");
+//                    }else if(withdrawAmount > currentAccount.getBalance()){
+//                        errorConsole.println("Invalid amount, amount cannot exceed current balance!");
+//                    } else {
+//                        currentAccount.withdraw(withdrawAmount);
+//                        successConsole.println("Withdraw successfully!");
+//                    }
+//                    break;
+//                case 3:
+//                    isInBalanceMenu = false;
+//                    break;
+//                default:
+//                    errorConsole.println("Please select from given options only!");
+//            }
+//        }
+//    }
+//
+//    private Integer balanceMenu(){
+//        return console.getIntegerInput(new StringBuilder()
+//                .append("+-------------------------------+\n")
+//                .append("|      ACCOUNT BALANCE MENU     |\n")
+//                .append("+-------------------------------+\n")
+//                .append("|  1. Deposit                   |\n")
+//                .append("|  2. Withdraw                  |\n")
+//                .append("|  3. Exit to main menu         |\n")
+//                .append("+-------------------------------+\n")
+//                .append("SELECT A NUMBER: ")
+//                .toString());
+//    }
 
     private void getGame() {
         boolean isGettingGame = true;

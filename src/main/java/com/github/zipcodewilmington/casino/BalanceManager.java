@@ -43,7 +43,7 @@ public abstract class BalanceManager {
         }
     }
 
-    public static Integer balanceMenu(){
+    private static Integer balanceMenu(){
         return console.getIntegerInput(new StringBuilder()
                 .append("+-------------------------------+\n")
                 .append("|      ACCOUNT BALANCE MENU     |\n")
