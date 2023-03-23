@@ -15,6 +15,4 @@ public abstract class Player {
         this.playerAccount = playerAccount;
     }
 
-    protected abstract Double checkBalance();
-
 }
