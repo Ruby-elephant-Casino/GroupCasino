@@ -92,7 +92,12 @@ public class SlotsGame extends Game {
 
     @Override
     public Player removePlayer(Player player) {
-        return null;
+        return currentPlayer=null;
+    }
+
+    @Override
+    public void startGame() {
+
     }
 
     @Override
