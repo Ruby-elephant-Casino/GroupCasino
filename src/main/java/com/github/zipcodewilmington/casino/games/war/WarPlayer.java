@@ -10,23 +10,12 @@ public class WarPlayer extends Player {
         super(playerAccount);
     }
 
-    @Override
-    protected void run() {
 
-    }
 
     @Override
     protected Double checkBalance() {
         return null;
     }
 
-    @Override
-    protected Double exitGame() {
-        return null;
-    }
 
-    @Override
-    protected Double startGame() {
-        return null;
-    }
 }
