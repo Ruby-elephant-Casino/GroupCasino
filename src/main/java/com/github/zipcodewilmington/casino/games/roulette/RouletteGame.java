@@ -1,11 +1,10 @@
 package com.github.zipcodewilmington.casino.games.roulette;
 
-import com.github.zipcodewilmington.WheelThing;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
+import com.github.zipcodewilmington.casino.gameTools.WheelThing;
 
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -152,6 +151,11 @@ public class RouletteGame extends Game {
     @Override
     public Player removePlayer(Player player) {
         return null;
+    }
+
+    @Override
+    public void startGame() {
+
     }
 
     @Override

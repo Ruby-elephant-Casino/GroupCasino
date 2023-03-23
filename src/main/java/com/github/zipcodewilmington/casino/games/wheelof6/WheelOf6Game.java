@@ -23,4 +23,9 @@ public class WheelOf6Game extends Game {
     public Player removePlayer(Player player) {
         return null;
     }
+
+    @Override
+    public void startGame() {
+
+    }
 }

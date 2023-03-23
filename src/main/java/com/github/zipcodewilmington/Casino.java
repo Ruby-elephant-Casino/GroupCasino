@@ -81,7 +81,7 @@ public class Casino implements Runnable {
                 // show balance
                 case 3:
                     if(currentAccount!=null){
-                        showBalance();
+                        BalanceManager.showBalance(currentAccount);
                     }else {
                         errorConsole.println("Please log in before execute this option");
                     }
