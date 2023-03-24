@@ -76,6 +76,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
 
                 case 1: // Number (pays 35 to 1)
                     bet = betHandler.takeBet(5, 1000, currentPlayer.getPlayerAccount().getBalance());
+
                     if (bet == 0.0) {
                         isStartGame = false;
                         break;
@@ -202,10 +203,10 @@ public class RouletteGame extends Game implements GamblingGameInterface {
     }
 
     public boolean checkGuessNumber() {
-        Integer numberGuess = -1;
-        while (numberGuess < 0 && numberGuess > 36) {
+        Integer numberGuess = 40;
+        while (numberGuess < 0 || numberGuess > 36) {
             numberGuess = console.getIntegerInput("Enter a number between 0 and 36: ");
-            if (numberGuess < 0 && numberGuess > 36) {
+            if (numberGuess < 0 || numberGuess > 36) {
                 errorConsole.println("Invalid number entered, try again!");
             }
         }

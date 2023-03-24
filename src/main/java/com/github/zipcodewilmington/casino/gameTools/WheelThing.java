@@ -21,7 +21,7 @@ public class WheelThing {
 
     public String spinString(int min, int max) {
         int result = random.nextInt((max - min) + 1) + min;
-        return wheelSlots[result-1];
+        return wheelSlots[result];
     }
 }
 
