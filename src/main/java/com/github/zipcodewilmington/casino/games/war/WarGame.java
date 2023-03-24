@@ -54,7 +54,7 @@ public class WarGame extends Game {
                 console.println(currentPlayer.getPlayerAccount().getBalance().toString());
                 break;
             case 3:
-                removePlayer(currentPlayer);
+                remove(currentPlayer);
                 isRunning = false;
                 break;
             default:
@@ -69,10 +69,6 @@ public class WarGame extends Game {
         return this.currentPlayer = (WarPlayer) player;
     }
 
-    @Override
-    public Player removePlayer(Player player) {
-        return null;
-    }
 
     @Override
     public void startGame() {
@@ -97,6 +93,7 @@ public class WarGame extends Game {
                     compareCards(currentPlayer.getCurrentCard(), dealerPlayer.getCurrentCard());
                     break;
                 case 2:
+                    remove(currentPlayer);
                     isPlaying = false;
                     break;
                 default:
@@ -197,5 +194,13 @@ public class WarGame extends Game {
                 .append(currentPlayer.getCardDeck().size())
                 .append(" cards in their deck.\n");
         return sb.toString();
+    }
+
+    public WarPlayer getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(WarPlayer currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 }

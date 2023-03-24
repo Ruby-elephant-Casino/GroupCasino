@@ -68,6 +68,7 @@ public class NumberGuessGame extends Game {
     @Override
     public Player removePlayer(Player player) {return currentPlayer = null;}
 
+
     @Override
     public void startGame() {
         boolean isPlaying = true;

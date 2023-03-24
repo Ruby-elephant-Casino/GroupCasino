@@ -15,4 +15,8 @@ public class CardDeck {
         }
         return cardDeck;
     }
+
+    public Card deal() {
+        return null;
+    }
 }
