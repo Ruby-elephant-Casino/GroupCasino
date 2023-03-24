@@ -14,9 +14,5 @@ public class SlotsPlayer extends Player implements GamblingPlayer {
 
 
 
-    @Override
-    public Double checkBalance() {
-        return null;
-    }
 
 }

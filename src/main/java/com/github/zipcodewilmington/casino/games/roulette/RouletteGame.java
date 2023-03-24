@@ -22,7 +22,6 @@ public class RouletteGame extends Game implements GamblingGameInterface {
     static WheelThing wheel;
     Integer payout;
 
-
     public RouletteGame() {
         wheel = new WheelThing();
         betHandler = new BettingPayout(5, 1000);
