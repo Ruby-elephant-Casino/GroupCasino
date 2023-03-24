@@ -8,7 +8,4 @@ public class RoulettePlayer extends Player implements GamblingPlayer {
     public RoulettePlayer(CasinoAccount playerAccount) {
         super(playerAccount);
     }
-
-
-
 }

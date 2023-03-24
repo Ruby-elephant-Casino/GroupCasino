@@ -3,26 +3,25 @@ package com.github.zipcodewilmington.casino.gameTools;
 import java.util.Random;
 
 public class WheelThing {
-
-
     private String[] wheelSlots;
 
-    private Random random = new Random();
+    private Random random;
 
-    public void Wheel(String[] wheelSlots) {
+    public WheelThing(String[] wheelSlots) {
+        this.wheelSlots = wheelSlots;
         random = new Random();
     }
-    public void Wheel() {
+    public WheelThing() {
         random = new Random();
     }
-
     public Integer spin(int min, int max) {
         int result = random.nextInt((max - min) + 1) + min;
         return result;
     }
 
-    public String spin() {
-        return null;
+    public String spinString(int min, int max) {
+        int result = random.nextInt((max - min) + 1) + min;
+        return wheelSlots[result-1];
     }
 }
 
