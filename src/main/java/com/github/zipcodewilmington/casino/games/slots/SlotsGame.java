@@ -47,8 +47,10 @@ public class SlotsGame extends Game {
 //            z1 = outcome[h];
 //            z2 = outcome[j];
             System.out.printf("[  " + "  %s  " + "  :  " + "  %s  " + "  :  " + "  %s  " +   "]\r", x,y,z);
-            Thread.sleep(110);
+            Thread.sleep(30);
+
         }
+        System.out.println("[  " +  x + "  :  " + y + "  :  " + z +   "]");
         return x + y + z;
     }
     @Override
@@ -57,17 +59,18 @@ public class SlotsGame extends Game {
     public void run() {
         boolean playSlots = true;
         boolean slotsRunning = true;
-        while (slotsRunning) {
             console.println(welcomeSlots());
-            Double money = console.getDoubleInput("Please enter money into slot machine!");
-            currentPlayer.getPlayerAccount().withdraw(money);
-            console.println("$" + money + " deposited!\n" + "Your account balance is " + currentPlayer.getPlayerAccount().getBalance());
+        while (slotsRunning) {
             int slotInput = slotsMenu();
             switch (slotInput) {
                 case 1:
+                    playSlots = true;
+                    Double money = console.getDoubleInput("Please enter money into slot machine!");
+                    currentPlayer.getPlayerAccount().withdraw(money);
+                    console.println("$" + money + " deposited!\n" + "Your account balance is " + currentPlayer.getPlayerAccount().getBalance());
                     while (playSlots) {
                         if (bettingPayout.checkBet(money)) {
-                            String pullLever = console.getStringInput("Enter \"pull\" to play");
+                            String pullLever = console.getStringInput("Enter \"pull\" to play\nEnter \"stop\" to quit");
                             if (pullLever.equalsIgnoreCase("pull")) {
                                 try {
                                     String pullSlot = pullSlots();
