@@ -256,48 +256,50 @@ public class RouletteGame extends Game implements GamblingGameInterface {
     }
 
 
-
-        public boolean exitGame () {
-            isRunning = false;
-            isStartGame = false;
-            return true; // set parameters to stop the game, return true to show game has exited
-        }
-
-        public Map<Integer, String> mapNumberToColor () {
-
-            numberToColor = new HashMap<>();
-            Integer[] green = new Integer[]{0, 00};
-            Integer[] red = new Integer[]{1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
-            Integer[] black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
-            for (int i : green) {
-                numberToColor.put(i, "green");
-            }
-            for (int i : red) {
-                numberToColor.put(i, "red");
-            }
-            for (int i : black) {
-                numberToColor.put(i, "black");
-            }
-            return numberToColor;
-        }
-        @Override
-        public void remove (Player player){
-            currentPlayer = null;
-        }
-        @Override
-        public Player add (Player player){
-            this.currentPlayer = (RoulettePlayer) player;
-            return player;
-        }
-
-        public RoulettePlayer getCurrentPlayer () {
-            return currentPlayer;
-        }
-
-        public void setCurrentPlayer (RoulettePlayer currentPlayer){
-            this.currentPlayer = currentPlayer;
-        }
+    public boolean exitGame() {
+        isRunning = false;
+        isStartGame = false;
+        return true; // set parameters to stop the game, return true to show game has exited
     }
+
+    public Map<Integer, String> mapNumberToColor() {
+
+        numberToColor = new HashMap<>();
+        Integer[] green = new Integer[]{0, 00};
+        Integer[] red = new Integer[]{1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
+        Integer[] black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
+        for (int i : green) {
+            numberToColor.put(i, "green");
+        }
+        for (int i : red) {
+            numberToColor.put(i, "red");
+        }
+        for (int i : black) {
+            numberToColor.put(i, "black");
+        }
+        return numberToColor;
+    }
+
+    @Override
+    public void remove(Player player) {
+        currentPlayer = null;
+    }
+
+    @Override
+    public Player add(Player player) {
+        this.currentPlayer = (RoulettePlayer) player;
+        return player;
+    }
+
+    public RoulettePlayer getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(RoulettePlayer currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+}
 
 
 //    public void Roulette() {
