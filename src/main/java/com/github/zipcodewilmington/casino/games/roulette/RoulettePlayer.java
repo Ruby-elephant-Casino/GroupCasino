@@ -8,11 +8,4 @@ public class RoulettePlayer extends Player implements GamblingPlayer {
     public RoulettePlayer(CasinoAccount playerAccount) {
         super(playerAccount);
     }
-
-    @Override
-    public Double checkBalance() {
-        return null;
-    }
-
-
 }

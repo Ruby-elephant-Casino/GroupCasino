@@ -91,6 +91,7 @@ public class SlotsGame extends Game {
                             break;
                         }
                     }
+                    break;
                 case 2:
                     BalanceManager.showBalance(currentPlayer.getPlayerAccount());
                     break;
