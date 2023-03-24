@@ -1,6 +1,14 @@
 package com.github.zipcodewilmington.casino.gameTools;
 
+import com.github.zipcodewilmington.casino.Player;
+
+
 public interface BettingGame {
+    int minBet = 0;
+    int maxBet = 0;
+}
+
+//public interface BettingGame {
 //    /**
 //     * take a bet from a player
 //     * @param player The player placing the bet
@@ -26,4 +34,5 @@ public interface BettingGame {
 //     * @return player that won a game
 //     */
 //     PlayerInterface getWinner();
-}
+//}
+

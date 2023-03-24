@@ -1,8 +1,6 @@
 package com.github.zipcodewilmington.casino;
 
 public interface GamblingPlayer {
+    //Double checkBalance();
 
-    void makeBet();
-    void checkBet();
-    boolean bettable(); /// prob don't need this??
 }

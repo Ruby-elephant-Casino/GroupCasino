@@ -12,31 +12,17 @@ public class NumberGuessPlayer extends Player implements GamblingPlayer {
         super(playerAccount);
     }
 
-    @Override
-    protected Double checkBalance() {
-        return super.getPlayerAccount().getBalance();
-    }
+//    @Override
+//    public Double checkBalance() {
+//        return super.getPlayerAccount().getBalance();
+//    }
+//
+//    public Double deposit(Double amount){
+//        if(amount < super.getPlayerAccount().getBalance()){
+//            super.getPlayerAccount().setBalance(amount);
+//            return super.getPlayerAccount().getBalance();
+//        }
+//        return -1.0;
+//    }
 
-    public Double deposit(Double amount){
-        if(amount < super.getPlayerAccount().getBalance()){
-            super.getPlayerAccount().setBalance(amount);
-            return super.getPlayerAccount().getBalance();
-        }
-        return -1.0;
-    }
-
-    @Override
-    public void makeBet() {
-
-    }
-
-    @Override
-    public void checkBet() {
-
-    }
-
-    @Override
-    public boolean bettable() {
-        return false;
-    }
 }
