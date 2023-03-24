@@ -97,10 +97,7 @@ public class WheelOfSixGame extends Game {
         return null;
     }
 
-    @Override
-    public Player removePlayer(Player player) {
-        return null;
-    }
+
 
     @Override
     public void startGame() {
