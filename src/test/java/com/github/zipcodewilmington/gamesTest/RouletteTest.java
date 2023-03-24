@@ -43,7 +43,7 @@ public class RouletteTest {
     public void testMapNumberToColor() {
         WheelThing wheel = new WheelThing();
         RouletteGame game = new RouletteGame();
-        Map<Integer, String> result = RouletteGame.mapNumberToColor();
+        Map<Integer, String> result = game.mapNumberToColor();
 
         assertEquals("green", result.get(0));
         assertEquals("green", result.get(00));
