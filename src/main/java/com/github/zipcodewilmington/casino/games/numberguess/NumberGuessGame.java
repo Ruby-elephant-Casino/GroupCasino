@@ -84,8 +84,8 @@ public class NumberGuessGame extends Game {
 
     public void printBetMenu() {
         isBetting = true;
-        sb.setLength(0);
         while(isBetting){
+            sb.setLength(0);
             Integer choice = console.getIntegerInput(sb
                     .append("+-------------------------------+\n")
                     .append("|          NUMBER GUESS         |\n")
@@ -118,8 +118,8 @@ public class NumberGuessGame extends Game {
     }
     public void getNumOfDice(){
         isPlaying = true;
-        sb.setLength(0);
         while(isPlaying){
+            sb.setLength(0);
             Integer choice = console.getIntegerInput(sb
                     .append("+-------------------------------+\n")
                     .append("|     NUMBER GUESS DICE MENU    |\n")
@@ -127,7 +127,7 @@ public class NumberGuessGame extends Game {
                     .append("|  1. How many dice to roll?    |\n")
                     .append("|  2. Guess the sum of the dice |\n")
                     .append("|  3. Roll the dice!!           |\n")
-                    .append("|  4. Exit Menu                 |\n")
+                    .append("|  4. Make a different bet      |\n")
                     .append("|  5. Exit Game                 |\n")
                     .append("+-------------------------------+\n")
                     .append("SELECT A NUMBER: ")
@@ -144,7 +144,8 @@ public class NumberGuessGame extends Game {
                     break;
                 case 3:
                     if(playerGuessed){
-                        compareDice(rollDice(), playerGuess, playerBet);
+                        playerGuessed = compareDice(rollDice(), playerGuess, playerBet);
+                        isPlaying = false;
                     }else{
                         console.println("Enter a guess!");
                         break;
@@ -163,19 +164,33 @@ public class NumberGuessGame extends Game {
         }
     }
 
-    private void compareDice(int diceSum, int playerGuess, double bet) {
+    private boolean compareDice(int diceSum, int playerGuess, double bet) {
         if(diceSum == playerGuess){
-            console.print("You won: " + String.valueOf(bettingPayout.betPayout(bet,multiplier)) + "dollars!");
-            currentPlayer.deposit(bettingPayout.betPayout(bet,multiplier));
+            boolean isWinner = true;
+            bettingPayout.betPayout(bet,multiplier, currentPlayer.getPlayerAccount(), isWinner);
+            console.println(printComparison(diceSum, playerGuess));
+            console.println("You won: " + String.valueOf(bettingPayout.betPayout(bet,multiplier)) + " dollars!");
         }else{
-            console.print("You won: " + String.valueOf(bettingPayout.betPayout(bet,multiplier)) + "dollars!");
-            //currentPlayer.;
+            boolean isWinner = false;
+            bettingPayout.betPayout(bet,multiplier, currentPlayer.getPlayerAccount(), isWinner);
+            console.println(printComparison(diceSum, playerGuess));
+            console.println("You lost: " + bet + " dollars!");
         }
+        return false;
     }
 
     private int rollDice(){
         Dice dice = new Dice(numberOfDice);
         return dice.rollDice(numberOfDice);
+    }
+
+    public String printComparison(int sum, int guess){
+        sb.setLength(0);
+        sb.append("The dice were a sum of: ")
+                .append(sum)
+                .append("\nYou guessed: ")
+                .append(guess);
+        return sb.toString();
     }
 
     private int getNumberOfDice() {
