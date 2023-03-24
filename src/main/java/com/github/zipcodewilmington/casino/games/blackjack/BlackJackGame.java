@@ -30,7 +30,9 @@ public abstract class BlackJackGame extends Game {
         System.out.println("");
         System.out.println("");
     }
+
     private static final int Starting_bankroll = 100;
+
     private String getPlayerMove() {
 
         while (true) {
@@ -48,54 +50,49 @@ public abstract class BlackJackGame extends Game {
 
     private void dealerTurn(DealerPlayer dealer, CardDeck deck) {
 
-            while (true) {
-                System.out.println("Dealer's hand");
-                System.out.println(dealer);
+        while (true) {
+            System.out.println("Dealer's hand");
+            System.out.println(dealer);
 
-                int value = dealer.getValue();
-                System.out.println("Dealer's hand has value " + value);
-                System.out.println("Enter to continue...");
-                scanner.nextLine();
+            int value = dealer.getValue();
+            System.out.println("Dealer's hand has value " + value);
+            System.out.println("Enter to continue...");
+            scanner.nextLine();
 
-                if (value < 17) {
-                    System.out.println("Dealer hits");
-                    Card c = deck.deal();
-                    dealer.addCard(c);
+            if (value < 17) {
+                System.out.println("Dealer hits");
+                Card c = deck.deal();
+                dealer.addCard(c);
 
-                    System.out.println("Dealer card was " + c);
+                System.out.println("Dealer card was " + c);
 
-                    if (dealer.busted()) {
-                        System.out.println("Dealer busted!");
-                        break;
-                    }
-                } else {
-                    System.out.println("Dealer stands.");
+                if (dealer.busted()) {
+                    System.out.println("Dealer busted!");
                     break;
                 }
-
+            } else {
+                System.out.println("Dealer stands.");
+                break;
             }
+
         }
+    }
 
     private boolean playerTurn(BlackJackPlayer player, CardDeck deck) {
-        while(true)
-        {
+        while (true) {
             String move = getPlayerMove();
 
-            if(move.equals("hit"))
-            {
+            if (move.equals("hit")) {
                 Card c = deck.deal();
                 System.out.println("Your card was: " + c);
                 player.addCard(c);
                 System.out.println("Player's hand");
                 System.out.println(player);
 
-                if(player.busted())
-                {
+                if (player.busted()) {
                     return true;
                 }
-            }
-            else
-            {
+            } else {
                 // If he didn't hit, player chose to stand
                 //and it means the turn is over
                 return false;
@@ -105,7 +102,9 @@ public abstract class BlackJackGame extends Game {
     }
 
 
-//    private boolean push(BlackJackPlayer player, DealerPlayer dealer)
+
+
+    //    private boolean push(BlackJackPlayer player, DealerPlayer dealer)
 //    {
 //        return player.getValue() == dealer.getValue();
 //    }
@@ -118,28 +117,24 @@ public abstract class BlackJackGame extends Game {
             return true;
         }
 
-     return player.getValue() > dealer.getValue(); //checks the values of the hands
+        return player.getValue() > dealer.getValue(); //checks the values of the hands
     }
 
-    private double findWinner(DealerPlayer dealer, BlackJackPlayer player, int bet)
-    {
-        if(playerWins(player, dealer)) {
+    private double findWinner(DealerPlayer dealer, BlackJackPlayer player, int bet) {
+        if (playerWins(player, dealer)) {
 
             System.out.println("Player wins!");
 
-            if(player.hasBlackjack()) {
+            if (player.hasBlackjack()) {
                 return 1.5 * bet;
             }
 
             return bet;
-        }
-        else if(push(player, dealer)){
+        } else if (push(player, dealer)) {
 
             System.out.println("You push");
             return 0;
-        }
-        else
-        {
+        } else {
             System.out.println("Dealer wins");
             return -bet;
         }
@@ -149,16 +144,15 @@ public abstract class BlackJackGame extends Game {
         return false;
     }
 
-    public void run()
-    {
+    public void run() {
         double bankroll = Starting_bankroll;
         System.out.println("Starting bankroll: " + bankroll);
 
-        while(true) {
+        while (true) {
             bankroll = playRound((int) bankroll);
             System.out.println("Would you like to play again? (Y/N)");
             String playAgain = scanner.nextLine();
-            if(playAgain.equalsIgnoreCase("N")) {
+            if (playAgain.equalsIgnoreCase("N")) {
                 break;
             }
         }
@@ -172,22 +166,28 @@ public abstract class BlackJackGame extends Game {
 
 
     @Override
-        public void remove (Player player){
+    public void remove(Player player) {
 
-        }
+    }
 
 //        @Override
 //        public void run () throws InterruptedException {
 //
 //        }
 
-        @Override
-        public Player add (Player player){
-            return null;
-        }
-
-        @Override
-        public Player removePlayer (Player player){
-            return null;
-        }
+    @Override
+    public Player add(Player player) {
+        return null;
     }
+
+//    @Override
+//    public Player removePlayer(Player player) {
+//        return null;
+//    }
+
+    @Override
+    public void startGame() {
+
+
+    }
+}

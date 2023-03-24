@@ -1,13 +1,10 @@
-package com.github.zipcodewilmington.gamesTest;
+package com.github.zipcodewilmington.casino.games.roulette;
 
-import com.github.zipcodewilmington.casino.gameTools.WheelThing;
-
-import java.util.Scanner;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class RouletteTest {
+public class RouletteGameTest {
 
     @Test
     public void checkResult() {

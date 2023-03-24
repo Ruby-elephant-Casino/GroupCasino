@@ -12,38 +12,11 @@ public class SlotsPlayer extends Player implements GamblingPlayer {
         super(playerAccount);
     }
 
-    @Override
-    protected void run() {
 
-    }
 
     @Override
-    protected Double checkBalance() {
+    public Double checkBalance() {
         return null;
     }
 
-    @Override
-    protected Double exitGame() {
-        return null;
-    }
-
-    @Override
-    protected Double startGame() {
-        return null;
-    }
-
-    @Override
-    public void makeBet() {
-
-    }
-
-    @Override
-    public void checkBet() {
-
-    }
-
-    @Override
-    public boolean bettable() {
-        return false;
-    }
 }

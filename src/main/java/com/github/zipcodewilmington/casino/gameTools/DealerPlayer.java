@@ -22,4 +22,8 @@ public class DealerPlayer {
     public int getHandValue() {
         return 0;
     }
+
+    public interface Dealer {
+        ArrayList<Card> currentCard = new ArrayList<>();
+    }
 }
