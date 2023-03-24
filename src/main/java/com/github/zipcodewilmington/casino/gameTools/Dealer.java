@@ -4,7 +4,6 @@ import com.github.zipcodewilmington.utils.Card;
 
 import java.util.ArrayList;
 
-abstract public class DealerPlayer {
-    ArrayList<Card> currentHand = new ArrayList<Card>();
-
+public interface Dealer {
+    ArrayList<Card> currentCard = new ArrayList<>();
 }

@@ -1,1 +1,2 @@
 whitwhit,whitpass,0.0
+whitney,whitney,10000.0

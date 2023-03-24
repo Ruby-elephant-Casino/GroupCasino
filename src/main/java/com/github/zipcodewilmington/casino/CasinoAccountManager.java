@@ -68,7 +68,6 @@ public class CasinoAccountManager {
         return new CasinoAccount(accountName,accountPassword);
     }
 
-
     public boolean checkAccountName(String accountName){
         // return true if account name already exist
         return accountMap.containsKey(accountName);
@@ -80,4 +79,5 @@ public class CasinoAccountManager {
     public void registerAccount(CasinoAccount casinoAccount) {
         accountMap.put(casinoAccount.getName(),casinoAccount);
     }
+
 }
