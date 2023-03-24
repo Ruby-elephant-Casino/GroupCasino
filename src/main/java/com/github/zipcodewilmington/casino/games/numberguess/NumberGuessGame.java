@@ -206,4 +206,12 @@ public class NumberGuessGame extends Game {
         isPlaying = false;
         isRunning = false;
     }
+
+    public NumberGuessPlayer getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(NumberGuessPlayer currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 }
