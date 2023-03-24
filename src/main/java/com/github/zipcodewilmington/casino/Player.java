@@ -1,6 +1,6 @@
 package com.github.zipcodewilmington.casino;
 
-public abstract class Player {
+public class Player {
     private CasinoAccount playerAccount;
 
     public CasinoAccount getPlayerAccount() {
