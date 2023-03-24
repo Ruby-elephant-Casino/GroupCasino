@@ -3,8 +3,7 @@ package com.github.zipcodewilmington.gamesTest;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
-import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
-import com.github.zipcodewilmington.casino.games.roulette.RoulettePlayer;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

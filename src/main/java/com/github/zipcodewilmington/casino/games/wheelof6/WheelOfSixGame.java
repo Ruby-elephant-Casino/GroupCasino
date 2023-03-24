@@ -21,10 +21,14 @@ public class WheelOfSixGame extends Game {
     private WheelThing wheel;
     private final String[] wheelSlots = new String[]{"cherry", "lemon", "orange", "plum", "bell", "bar"};
 
+
+
+
     public WheelOfSixGame() {
         betHandler = new BettingPayout(5,1000);
         wheel = new WheelThing(wheelSlots);
     }
+
 
     public double getBet() {
         double bet = betHandler.takeBet(5, 1000, currentPlayer.getPlayerAccount().getBalance());

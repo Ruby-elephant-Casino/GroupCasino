@@ -30,10 +30,12 @@ public class BettingPayout {
         if (isWon) {
             Double newBalance = account.getBalance() + (bet * multiplier);
             account.setBalance(newBalance);
+            console.println("Your updated balance is $"+ newBalance);
             return (bet * multiplier);
         }
         Double newBalance = account.getBalance() - bet;
         account.setBalance(newBalance);
+        console.println("Your updated balance is $"+ newBalance);
         return bet;
     }
 
