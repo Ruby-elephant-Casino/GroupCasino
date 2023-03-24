@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino.games.slots;
 import com.github.zipcodewilmington.casino.BettingPayout;
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -25,7 +26,7 @@ public class SlotsGame extends Game {
     }
     public String pullSlots() throws InterruptedException {
         rand = new Random();
-        int rollCount = 200;
+        int rollCount = 100;
         for (int i = 0; i < rollCount; i++) {
             a = getSlotRoll();
 //            b = getSlotRoll();
@@ -46,44 +47,70 @@ public class SlotsGame extends Game {
 //            z1 = outcome[h];
 //            z2 = outcome[j];
             System.out.printf("[  " + "  %s  " + "  :  " + "  %s  " + "  :  " + "  %s  " +   "]\r", x,y,z);
-            Thread.sleep(120);
+            Thread.sleep(30);
+
         }
+        System.out.println("[  " +  x + "  :  " + y + "  :  " + z +   "]");
         return x + y + z;
     }
     @Override
     public void remove(Player player) {
     }
     public void run() {
-        boolean inSlots = true;
-        console.println(welcomeSlots());
-        Double money = console.getDoubleInput("Please enter money into slot machine!");
-        currentPlayer.getPlayerAccount().withdraw(money);
-        if (bettingPayout.checkBet(money)) {
-            String pullLever = console.getStringInput("adsf");
-            try {
-                String pullSlot = pullSlots();
-                console.println(welcomeSlots());
-                while (inSlots) {
-
-                }
-
-            } catch (InterruptedException ex) {
-                //throw new RuntimeException(ex);
+        boolean playSlots = true;
+        boolean slotsRunning = true;
+            console.println(welcomeSlots());
+        while (slotsRunning) {
+            int slotInput = slotsMenu();
+            switch (slotInput) {
+                case 1:
+                    playSlots = true;
+                    Double money = console.getDoubleInput("Please enter money into slot machine!");
+                    currentPlayer.getPlayerAccount().withdraw(money);
+                    console.println("$" + money + " deposited!\n" + "Your account balance is " + currentPlayer.getPlayerAccount().getBalance());
+                    while (playSlots) {
+                        if (bettingPayout.checkBet(money)) {
+                            String pullLever = console.getStringInput("Enter \"pull\" to play\nEnter \"stop\" to quit");
+                            if (pullLever.equalsIgnoreCase("pull")) {
+                                try {
+                                    String pullSlot = pullSlots();
+                                } catch (InterruptedException ex) {
+                                    //throw new RuntimeException(ex);
+                                }
+                            } else if (pullLever.equalsIgnoreCase("stop")) {
+                                playSlots = false;
+                            }
+                        }
+                    }
+                case 2:
+                    console.println(currentPlayer.getPlayerAccount().getBalance().toString());
+                    break;
+                case 3:
+                    slotsRunning = false;
+                    break;
             }
-    }
+        }
     }
 
     private String welcomeSlots(){
         return new StringBuilder()
                 .append("+-------------------------------+\n")
                 .append("Ruby Slots! Are you a Winner?\n")
-                .append("+-------------------------------+\n")
                 .toString();
     }
-    private String slotsMenu(){
-        return null;//console.getStringInput(new StringBuilder()
-
+    private Integer slotsMenu(){
+        return console.getIntegerInput(new StringBuilder()
+                .append("+-------------------------------+\n")
+                .append("|         RUBY ~ SLOTS          |\n")
+                .append("+-------------------------------+\n")
+                .append("|  1. Pay slots                 |\n")
+                .append("|  2. Show balance              |\n")
+                .append("|  3. Exit slots                |\n")
+                .append("+-------------------------------+\n")
+                .append("SELECT A NUMBER: ")
+                .toString());
     }
+
     @Override
     public Player add(Player player) {
         this.currentPlayer = (SlotsPlayer)player;
