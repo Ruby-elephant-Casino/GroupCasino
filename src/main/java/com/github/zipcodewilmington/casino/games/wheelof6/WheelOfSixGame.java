@@ -15,9 +15,7 @@ public class WheelOfSixGame extends Game {
         this.scanner = scanner;
     }
 
-    public WheelOfSixGame() {
 
-    }
 
     public void play() {
         int bet = getBet();

@@ -75,7 +75,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
             Integer option = RouletteStartGameMenu();
             switch (option) {
 
-                case 1: // Number (pays 38 to 1)
+                case 1: // Number (pays 35 to 1)
                     bet = betHandler.takeBet(5, 1000, currentPlayer.getPlayerAccount().getBalance());
 
                     if (bet == 0.0) {
@@ -83,9 +83,9 @@ public class RouletteGame extends Game implements GamblingGameInterface {
                         break;
                     }
                     isWon = checkGuessNumber();
-                    amountWon = betHandler.betPayout(bet, 38, currentPlayer.getPlayerAccount(), isWon);
+                    amountWon = betHandler.betPayout(bet, 1, currentPlayer.getPlayerAccount(), isWon);
                     if (isWon) {
-                        console.println(String.format("You have won $%.2f", amountWon));
+                        console.println(String.format("You have won $%.2f!", amountWon ));
                         break;
                     }
                     errorConsole.println(String.format("Sorry, you have lost $%.2f!", bet));
@@ -156,7 +156,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
                 .append("+---------------------------------+\n")
                 .append("|   ROULETTE BET TYPE SELECTION   |\n")
                 .append("+---------------------------------+\n")
-                .append("|  1. Number (pays 38 to 1)       |\n")
+                .append("|  1. Number (pays 35 to 1)       |\n")
                 .append("|  2. Even or Odd (pays 1 to 1)   |\n")
                 .append("|  3. Red or Black (pays 1 to 1)  |\n")
                 .append("|  4. Green 0 & 00 (pays 1 to 3)  |\n")
