@@ -55,8 +55,8 @@ public class RouletteGame extends Game implements GamblingGameInterface {
             System.out.println("4. Green 0 & 00 (pays 1 to 3)");
             int betType = scanner.nextInt();
 
-            int result = Integer.parseInt(wheel.spin()); //spin wheel to get random number
-            String color= numberToColor.get(result); // get color of the number it lands on
+            int result = 0;//Integer.parseInt(wheel.spin()); //spin wheel to get random number
+            String color= "";//numberToColor.get(result); // get color of the number it lands on
             int payOut = 0;
 
             switch (betType) {
@@ -159,7 +159,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
         while(isPlaying) {
             switch (option) {
                 case 1: // Number (pays 38 to 1)
-                    Double bet = betHandler.takeBet(5,1000,currentPlayer.getPlayerAccount().getBalance())
+                    Double bet = betHandler.takeBet(5,1000,currentPlayer.getPlayerAccount().getBalance());
                     if(bet == 0.0){
                         isPlaying = false;
                     }
