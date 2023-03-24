@@ -74,8 +74,8 @@ public class NumberGuessGame extends Game {
         return this.currentPlayer = (NumberGuessPlayer) player;
     }
 
-    @Override
     public Player removePlayer(Player player) {return currentPlayer = null;}
+
 
     @Override
     public void startGame() {

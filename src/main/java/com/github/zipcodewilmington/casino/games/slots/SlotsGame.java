@@ -1,4 +1,5 @@
 package com.github.zipcodewilmington.casino.games.slots;
+import com.github.zipcodewilmington.casino.BalanceManager;
 import com.github.zipcodewilmington.casino.BettingPayout;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
@@ -23,7 +24,7 @@ public class SlotsGame extends Game {
     public int getSlotRoll() {
         return rand.nextInt(outcome.length);
     }
-    public int pullSlots() throws InterruptedException {
+    public void pullSlots() throws InterruptedException {
         rand = new Random();
         int rollCount = 100;
         for (int i = 0; i < rollCount; i++) {
@@ -45,12 +46,11 @@ public class SlotsGame extends Game {
             z = outcome[c];
 //            z1 = outcome[h];
 //            z2 = outcome[j];
-            System.out.printf("[  " + "  %s  " + "  :  " + "  %s  " + "  :  " + "  %s  " +   "]\r", x,y,z);
+            System.out.printf("[  " + "  %8s  " + "  :  " + "  %8s  " + "  :  " + "  %8s  " +   "]\r", x,y,z);
             Thread.sleep(30);
         }
         System.out.println("[  " +  x + "  :  " + y + "  :  " + z +   "]");
         System.out.println();
-        return a + b + c;
     }
     @Override
     public void remove(Player player) {
@@ -64,11 +64,12 @@ public class SlotsGame extends Game {
             switch (slotInput) {
                 case 1:
                     playSlots = true;
-                    Double money = console.getDoubleInput("Please enter money into slot machine!");
-//                    if (money > currentPlayer.getPlayerAccount().getBalance()){
-//                        console.println("Insufficient funds\nYour account balance is " + currentPlayer.getPlayerAccount().getBalance());
-//                        break;
-//                    }
+                    Double money = console.getDoubleInput("Please enter money into slot machine!\nMinimum bet is " + minBet
+                    + " Maximum bet is " + maxBet);
+                    if (money > currentPlayer.getPlayerAccount().getBalance()){
+                        console.println("Insufficient funds\nYour account balance is " + currentPlayer.getPlayerAccount().getBalance());
+                        break;
+                    }
                     currentPlayer.getPlayerAccount().withdraw(money);
                     console.println("$" + money + " deposited!\n" + "Your account balance is " + currentPlayer.getPlayerAccount().getBalance());
                     while (playSlots) {
@@ -86,10 +87,12 @@ public class SlotsGame extends Game {
                                 console.println(currentPlayer.getPlayerAccount().getBalance().toString());
                                 playSlots = false;
                             }
+                        } else {
+                            break;
                         }
                     }
                 case 2:
-                    console.println(currentPlayer.getPlayerAccount().getBalance().toString());
+                    BalanceManager.showBalance(currentPlayer.getPlayerAccount());
                     break;
                 case 3:
                     slotsRunning = false;
@@ -97,7 +100,7 @@ public class SlotsGame extends Game {
             }
         }
     }
-    private double winOrLose(double money, int a, int b, int c) {
+    public double winOrLose(double money, int a, int b, int c) {
         if (a == 1 && b == 1 && c == 1){
             double payout = bettingPayout.betPayout(money, 40);
             currentPlayer.getPlayerAccount().deposit(payout);
@@ -144,10 +147,6 @@ public class SlotsGame extends Game {
         return currentPlayer;
     }
 
-    @Override
-    public Player removePlayer(Player player) {
-        return currentPlayer=null;
-    }
 
     @Override
     public void startGame() {

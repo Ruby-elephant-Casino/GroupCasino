@@ -7,13 +7,16 @@ public class WheelThing {
 
     private String[] wheelSlots;
 
-    private Random random;
+    private Random random = new Random();
 
     public void Wheel(String[] wheelSlots) {
         random = new Random();
     }
+    public void Wheel() {
+        random = new Random();
+    }
 
-    public int spin(int min, int max) {
+    public Integer spin(int min, int max) {
         int result = random.nextInt((max - min) + 1) + min;
         return result;
     }
