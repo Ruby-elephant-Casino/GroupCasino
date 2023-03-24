@@ -1,17 +1,16 @@
 package com.github.zipcodewilmington.casino.games.blackjack;
 
-import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.gameTools.CardDeck;
-import com.github.zipcodewilmington.casino.gameTools.DealerPlayer;
+import com.github.zipcodewilmington.casino.gameTools.Dealer;
 import com.github.zipcodewilmington.utils.Card;
 
 import java.util.Scanner;
 
 
 
-public abstract class BlackJackGame extends Game {
+public class BlackJackGame extends Game {
     Scanner scanner = new Scanner(System.in);
 
     public void initializeGame() {
@@ -48,7 +47,7 @@ public abstract class BlackJackGame extends Game {
     }
 
 
-    private void dealerTurn(DealerPlayer dealer, CardDeck deck) {
+    private void dealerTurn(Dealer dealer, CardDeck deck) {
 
         while (true) {
             System.out.println("Dealer's hand");
@@ -108,7 +107,7 @@ public abstract class BlackJackGame extends Game {
 //    {
 //        return player.getValue() == dealer.getValue();
 //    }
-    private boolean playerWins(BlackJackPlayer player, DealerPlayer dealer) {
+    private boolean playerWins(BlackJackPlayer player, Dealer dealer) {
         if (player.busted()) {
             return false;
         }
@@ -120,7 +119,7 @@ public abstract class BlackJackGame extends Game {
         return player.getValue() > dealer.getValue(); //checks the values of the hands
     }
 
-    private double findWinner(DealerPlayer dealer, BlackJackPlayer player, int bet) {
+    private double findWinner(Dealer dealer, BlackJackPlayer player, int bet) {
         if (playerWins(player, dealer)) {
 
             System.out.println("Player wins!");
@@ -140,7 +139,7 @@ public abstract class BlackJackGame extends Game {
         }
     }
 
-    private boolean push(BlackJackPlayer player, DealerPlayer dealer) {
+    private boolean push(BlackJackPlayer player, Dealer dealer) {
         return false;
     }
 

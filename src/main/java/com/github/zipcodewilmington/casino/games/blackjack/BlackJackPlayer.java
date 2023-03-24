@@ -18,7 +18,7 @@ public class BlackJackPlayer extends Player implements GamblingPlayer {
     }
 
 
-    @Override
+
     public boolean hasBlackjack() {
         return false;
     }

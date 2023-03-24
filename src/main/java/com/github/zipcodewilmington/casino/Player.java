@@ -18,5 +18,4 @@ public abstract class Player {
     }
 
 
-    public abstract boolean hasBlackjack();
 }

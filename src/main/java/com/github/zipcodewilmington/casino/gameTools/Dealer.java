@@ -4,7 +4,7 @@ import com.github.zipcodewilmington.utils.Card;
 
 import java.util.ArrayList;
 
-public class DealerPlayer {
+public class Dealer {
     ArrayList<Card> currentHand = new ArrayList<Card>();
 
     public void addCard(Card card) {
@@ -23,7 +23,7 @@ public class DealerPlayer {
         return 0;
     }
 
-    public interface Dealer {
-        ArrayList<Card> currentCard = new ArrayList<>();
-    }
+//    public interface Dealer {
+//        ArrayList<Card> currentCard = new ArrayList<>();
+//    }
 }

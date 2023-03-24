@@ -2,16 +2,12 @@ package com.github.zipcodewilmington.gamesTest;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.gameTools.CardDeck;
-import com.github.zipcodewilmington.casino.gameTools.DealerPlayer;
+import com.github.zipcodewilmington.casino.gameTools.Dealer;
 import com.github.zipcodewilmington.casino.gameTools.Rank;
 import com.github.zipcodewilmington.casino.gameTools.Suit;
 import com.github.zipcodewilmington.casino.games.blackjack.BlackJackPlayer;
 import com.github.zipcodewilmington.utils.Card;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 import static org.junit.Assert.*;
 
@@ -40,7 +36,7 @@ public class BlackjackTest {
     @Test
     public void testDealerTurn() {
         CardDeck deck = new CardDeck();
-        DealerPlayer dealer = new DealerPlayer();
+        Dealer dealer = new Dealer();
         dealer.addCard(new Card(Suit.CLUBS, Rank.KING));
         dealer.addCard(new Card(Suit.HEARTS, Rank.SEVEN));
 
@@ -56,7 +52,7 @@ public class BlackjackTest {
         }
     }
 
-    private void dealerTurn(DealerPlayer dealer, CardDeck deck) {
+    private void dealerTurn(Dealer dealer, CardDeck deck) {
 
     }
 
@@ -92,7 +88,7 @@ public class BlackjackTest {
         player.addCard(new Card(Suit.HEARTS, Rank.FIVE));
 
         // create a dealer and add two cards to their hand
-        DealerPlayer dealer = new DealerPlayer();
+        Dealer dealer = new Dealer();
         dealer.addCard(new Card(Suit.SPADES, Rank.ACE));
         dealer.addCard(new Card(Suit.CLUBS, Rank.SEVEN));
 
@@ -104,7 +100,7 @@ public class BlackjackTest {
         assertEquals(expected, actual);
     }
 
-    private boolean playerWins(BlackJackPlayer player, DealerPlayer dealer) {
+    private boolean playerWins(BlackJackPlayer player, Dealer dealer) {
         return false;
     }
 
