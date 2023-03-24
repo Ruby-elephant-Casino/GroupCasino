@@ -1,5 +1,7 @@
 package com.github.zipcodewilmington.casino;
 
+import com.github.zipcodewilmington.utils.Card;
+
 public abstract class Player {
     private CasinoAccount playerAccount;
 
@@ -15,4 +17,5 @@ public abstract class Player {
 
     protected abstract Double startGame();
 
+    public abstract boolean hasBlackjack();
 }
