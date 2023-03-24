@@ -12,13 +12,6 @@ public class BlackJackPlayer extends Player implements GamblingPlayer {
     }
 
 
-    @Override
-    public Double checkBalance() {
-        return null;
-    }
-
-
-
     public boolean hasBlackjack() {
         return false;
     }
