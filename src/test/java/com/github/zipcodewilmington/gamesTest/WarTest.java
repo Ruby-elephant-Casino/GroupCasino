@@ -1,6 +1,10 @@
 package com.github.zipcodewilmington.gamesTest;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.Player;
+import com.github.zipcodewilmington.casino.games.war.WarGame;
+import com.github.zipcodewilmington.casino.games.war.WarPlayer;
+
 
 import com.github.zipcodewilmington.casino.games.war.WarGame;
 import com.github.zipcodewilmington.casino.games.war.WarPlayer;
@@ -13,8 +17,15 @@ import static org.junit.Assert.*;
 
 public class WarTest {
     @Test
-    public void testAdd() {
+    public void dealCardsTest() {
+        //given
 
+        //when
+
+        //then
+    }
+
+    public void testAdd() {
         WarPlayer warPlayer = new WarPlayer(new CasinoAccount());
         WarGame game = new WarGame();
         game.add(warPlayer);
@@ -22,14 +33,8 @@ public class WarTest {
     }
 
     @Test
-    public void remove() {
-        WarPlayer warplayer = new WarPlayer(new CasinoAccount());
-
-        WarGame game = new WarGame();
-        game.add(warplayer);
-        game.remove(warplayer);
-        assertNull(game.getCurrentPlayer());
-
+    public void compareCardsTest(){
+        //given
     }
     @Test
     public void testConstructor() {

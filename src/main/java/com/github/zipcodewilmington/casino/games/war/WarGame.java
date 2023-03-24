@@ -1,5 +1,6 @@
 package com.github.zipcodewilmington.casino.games.war;
 
+import com.github.zipcodewilmington.casino.BalanceManager;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.gameTools.CardDeck;
@@ -28,6 +29,7 @@ public class WarGame extends Game {
 
     @Override
     public void run() throws InterruptedException {
+
         warMainMenu();
     }
 
@@ -51,7 +53,7 @@ public class WarGame extends Game {
                 startGame();
                 break;
             case 2:
-                console.println(currentPlayer.getPlayerAccount().getBalance().toString());
+                BalanceManager.showBalance(currentPlayer.getPlayerAccount());
                 break;
             case 3:
                 remove(currentPlayer);
