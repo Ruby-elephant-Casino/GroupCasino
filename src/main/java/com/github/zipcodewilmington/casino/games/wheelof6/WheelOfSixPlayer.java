@@ -1,14 +1,14 @@
-package com.github.zipcodewilmington.casino.games.blackjack;
+package com.github.zipcodewilmington.casino.games.wheelof6;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GamblingPlayer;
 import com.github.zipcodewilmington.casino.Player;
 
-public class BlackJackPlayer extends Player implements GamblingPlayer {
-
-    public BlackJackPlayer(CasinoAccount playerAccount) {
+public class WheelOfSixPlayer extends Player implements GamblingPlayer {
+    public WheelOfSixPlayer(CasinoAccount playerAccount) {
         super(playerAccount);
     }
+
 
 
     @Override
