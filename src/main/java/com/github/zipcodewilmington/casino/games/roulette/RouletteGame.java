@@ -142,8 +142,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
                     break;
 
                 case 6: // exit game completely
-                    isStartGame = false;
-                    isRunning = false;
+                    exitGame();
                     break;
 
                 default: //slots game
@@ -214,6 +213,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
     }
 
     public boolean checkResult(Integer numberLandedOn,Integer numberGuess,Integer typeBet){
+
         boolean isWon = false;
         switch (typeBet) {
             case 1: // guess number
@@ -243,13 +243,54 @@ public class RouletteGame extends Game implements GamblingGameInterface {
             errorConsole.println("Sorry, the ball landed on " +
                     numberLandedOn + "("+ numberToColor.get(numberLandedOn)+").");
         }
+
+       boolean isWon = false;
+       switch (typeBet) {
+           case 1: // guess number
+               if (Objects.equals(numberGuess, numberLandedOn))
+                   isWon = true;
+               break;
+           case 2: //guess even odd
+               if ((numberGuess == 1 && numberLandedOn%2==0)||(numberGuess == 2 && numberLandedOn%2!=0))
+                   isWon = true;
+               break;
+           case 3: // check red or black
+               if ((numberGuess == 1 && numberToColor.get(numberLandedOn).equalsIgnoreCase("red"))
+                       ||(numberGuess == 2 && numberToColor.get(numberLandedOn).equalsIgnoreCase("black")))
+                   isWon = true;
+               break;
+           case 4:
+               if((numberLandedOn==0 || numberLandedOn==00)&&numberGuess==numberLandedOn)
+                   isWon = true;
+               break;
+           default:
+               errorConsole.println("Invalid value entered!");
+               break;
+       }
+       if(isWon) {
+           successConsole.println("Congratulations! The ball landed on " +
+                   numberLandedOn +"("+ numberToColor.get(numberLandedOn)+").");
+       } else{
+           errorConsole.println("Sorry, the ball landed on " +
+                   numberLandedOn + "("+ numberToColor.get(numberLandedOn)+").");
+       }
+
         return isWon;
     }
 
     public static Integer spinWheelNumber(){
         return wheel.spin(0,36);
     }
+
     public static Map<Integer,String> mapNumberToColor(){
+
+    public boolean exitGame(){
+       isRunning = false;
+       isStartGame = false;
+       return true; // set parameters to stop the game, return true to show game has exited
+    }
+    public Map<Integer,String> mapNumberToColor(){
+
         numberToColor = new HashMap<>();
         Integer[] green = new Integer[]{0,00};
         Integer[] red = new Integer[]{1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
