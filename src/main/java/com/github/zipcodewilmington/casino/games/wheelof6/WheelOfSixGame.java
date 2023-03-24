@@ -143,37 +143,23 @@ public class WheelOfSixGame extends Game {
 
     @Override
     public void startGame() {
-        String[] wheelSlots = {"1", "2", "3", "4", "5", "6"};
-        WheelThing wheel = new WheelThing(wheelSlots);
         console.println("Welcome to the Wheel of 6!");
         console.println("The game is simple - just guess which of the 6 slots the wheel will land on.\n");
-
-//        while (true) {
-//            play();
-//            double bet = game.getBet();
-//            if (bet == 0.0) {
-//                break;
-//            }
-//        }
-
-        isStartGame = true;
-        console.println("Welcome to the Wheel of Six Bet Dashboard!");
-        while (isStartGame) {
-            Integer option = w6StartGameMenu();
-            switch (option) {
-                case 1: // start game
-                    play();
-                    break;
-                case 2: // check balance / deposit / withdraw
-                    isStartGame = false;
-                    break;
-                case 3: // exit game
-                    isStartGame = false;
-                    isRunning = false;
-                    break;
-                default:
-                    errorConsole.println("Invalid Entry, try again!");
-                    break;
+        double bet = -1;
+        while(bet!=0.0){
+            bet = getBet();
+            if(bet==0.0){
+                return;
+            }
+            String guess =  getGuess();
+            String result = (wheel.spinString(0,wheelSlots.length));
+            System.out.println("The wheel landed on: " + result);
+            if (guess.equalsIgnoreCase(result)) {
+                double wins = betHandler.betPayout(bet,1,currentPlayer.getPlayerAccount(),true);
+                successConsole.println("Congratulations! You won $" + wins);
+            } else {
+                double loses = betHandler.betPayout(bet,1,currentPlayer.getPlayerAccount(),false);
+                errorConsole.println(String.format("Sorry, you lost $%.2f better luck next time!",loses));
             }
         }
     }
@@ -185,7 +171,6 @@ public class WheelOfSixGame extends Game {
         String guess =  getGuess();
         String result = (wheel.spinString(0,wheelSlots.length));
         System.out.println("The wheel landed on: " + result);
-
         if (guess.equalsIgnoreCase(result)) {
             double wins = betHandler.betPayout(bet,1,currentPlayer.getPlayerAccount(),true);
             successConsole.println("Congratulations! You won $" + wins);
