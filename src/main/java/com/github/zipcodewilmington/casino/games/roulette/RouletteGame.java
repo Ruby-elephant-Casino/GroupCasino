@@ -10,10 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import java.util.Objects;
-import java.util.Scanner;
 
 public class RouletteGame extends Game implements GamblingGameInterface {
-    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private final IOConsole console = new IOConsole(AnsiColor.CYAN);
     private final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
     private final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
     Map<Integer, String> numberToColor = new HashMap<>();
@@ -234,6 +233,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
                     isStartGame = false;
                     isRunning = false;
                     break;
+
                 default: //slots game
                     break;
             }
