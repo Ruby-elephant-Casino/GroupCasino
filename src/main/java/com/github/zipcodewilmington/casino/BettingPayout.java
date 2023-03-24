@@ -20,7 +20,7 @@ public class BettingPayout {
     public boolean checkBetAgainstBalance(double bet, double currentBalance){
         return bet <= currentBalance;
     }
-    public static double betPayout(double bet, double multiplier){
+    public double betPayout(double bet, double multiplier){
         return (bet * multiplier);
     }
     public boolean checkBet(double bet){
