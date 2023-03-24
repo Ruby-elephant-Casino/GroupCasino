@@ -48,4 +48,6 @@ public class WarPlayer extends Player {
     public Queue<Card> getCardDeck(){
         return cardDeck;
     }
+
+
 }

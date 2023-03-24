@@ -195,4 +195,12 @@ public class WarGame extends Game {
                 .append(" cards in their deck.\n");
         return sb.toString();
     }
+
+    public WarPlayer getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(WarPlayer currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 }
