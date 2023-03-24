@@ -10,10 +10,4 @@ public class WheelOfSixPlayer extends Player implements GamblingPlayer {
     }
 
 
-
-    @Override
-    public Double checkBalance() {
-        return null;
-    }
-
 }

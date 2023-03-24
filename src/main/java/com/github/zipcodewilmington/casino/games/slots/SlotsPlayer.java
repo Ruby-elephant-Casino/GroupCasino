@@ -11,12 +11,4 @@ public class SlotsPlayer extends Player implements GamblingPlayer {
     public SlotsPlayer(CasinoAccount playerAccount) {
         super(playerAccount);
     }
-
-
-
-    @Override
-    public Double checkBalance() {
-        return null;
-    }
-
 }

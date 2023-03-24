@@ -40,7 +40,6 @@ public class BettingPayout {
 
     public double betPayout(double bet, double multiplier){
         return (bet * multiplier);
-
     }
     public boolean checkBet(double bet){
         return (checkMin(bet) && checkMax(bet));

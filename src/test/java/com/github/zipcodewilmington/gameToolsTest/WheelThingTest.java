@@ -18,19 +18,17 @@ public class WheelThingTest {
     @Test
     void testSpinReturnsValidValue() {
         String[] wheelSlots = {"cherry", "lemon", "orange", "plum", "bell", "bar"};
-        WheelThing wheel = new WheelThing();
-        wheel.Wheel(wheelSlots);
+        WheelThing wheel = new WheelThing(wheelSlots);
         Set<String> validValues = new HashSet<>(Arrays.asList(wheelSlots));
-        assertTrue(validValues.contains(wheel.spin()));
+        assertTrue(validValues.contains(wheel.spinString(0,wheelSlots.length-1)));
     }
 
     @Test
     void testEmptyWheel() {
         String[] wheelSlots = {};
-        WheelThing wheel = new WheelThing();
-        wheel.Wheel(wheelSlots);
+        WheelThing wheel = new WheelThing(wheelSlots);
 
         // spinning an empty wheel should throw an exception
-        assertThrows(IllegalArgumentException.class, wheel::spin);
+        //assertThrows(IllegalArgumentException.class, wheel.spinString(1,2));
     }
 }

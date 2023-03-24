@@ -22,7 +22,6 @@ public class RouletteGame extends Game implements GamblingGameInterface {
     static WheelThing wheel;
     Integer payout;
 
-
     public RouletteGame() {
         wheel = new WheelThing();
         betHandler = new BettingPayout(5, 1000);
@@ -77,7 +76,6 @@ public class RouletteGame extends Game implements GamblingGameInterface {
 
                 case 1: // Number (pays 35 to 1)
                     bet = betHandler.takeBet(5, 1000, currentPlayer.getPlayerAccount().getBalance());
-
                     if (bet == 0.0) {
                         isStartGame = false;
                         break;

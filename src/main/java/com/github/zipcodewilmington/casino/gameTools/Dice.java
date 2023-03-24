@@ -21,7 +21,7 @@ public class Dice {
         return numberDice;
     }
     public int rollDice(int numDice) {
-        for (int i = 1; i <= numberDice; i++) {
+        for (int i = 1; i <= numDice; i++) {
             sumOfRoll += toss.nextInt(6) + 1;
         }
         return sumOfRoll;
