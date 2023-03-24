@@ -97,7 +97,6 @@ public class WarGame extends Game {
                     compareCards(currentPlayer.getCurrentCard(), dealerPlayer.getCurrentCard());
                     break;
                 case 2:
-                    removePlayer(currentPlayer);
                     isPlaying = false;
                     break;
                 default:
