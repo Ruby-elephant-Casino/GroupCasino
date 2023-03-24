@@ -21,6 +21,9 @@ public class NumberGuessGame extends Game {
     int numberOfDice = 2;
     int playerGuess;
     boolean isPlaying, isRunning, isBetting;
+    boolean playerGuessed;
+    double playerBet;
+    double multiplier = 2;
     BettingPayout bettingPayout = new BettingPayout(minBet, maxBet);
 
 
@@ -96,7 +99,7 @@ public class NumberGuessGame extends Game {
                     .toString());
             switch (choice) {
                 case 1:
-                    bettingPayout.takeBet(minBet, maxBet, currentPlayer.getPlayerAccount().getBalance());
+                    playerBet = bettingPayout.takeBet(minBet, maxBet, currentPlayer.getPlayerAccount().getBalance());
                     getNumOfDice();
                     break;
                 case 2:
@@ -123,8 +126,9 @@ public class NumberGuessGame extends Game {
                     .append("+-------------------------------+\n")
                     .append("|  1. How many dice to roll?    |\n")
                     .append("|  2. Guess the sum of the dice |\n")
-                    .append("|  3. Exit Menu                 |\n")
-                    .append("|  4. Exit Game                 |\n")
+                    .append("|  3. Roll the dice!!           |\n")
+                    .append("|  4. Exit Menu                 |\n")
+                    .append("|  5. Exit Game                 |\n")
                     .append("+-------------------------------+\n")
                     .append("SELECT A NUMBER: ")
                     .toString());
@@ -136,11 +140,20 @@ public class NumberGuessGame extends Game {
                     sb.setLength(0);
                     sb.append("Enter the sum of the dice: ");
                     playerGuess = console.getIntegerInput(sb.toString());
+                    playerGuessed = true;
                     break;
                 case 3:
-                    isPlaying = false;
+                    if(playerGuessed){
+                        compareDice(rollDice(), playerGuess, playerBet);
+                    }else{
+                        console.println("Enter a guess!");
+                        break;
+                    }
                     break;
                 case 4:
+                    isPlaying = false;
+                    break;
+                case 5:
                     exitGame();
                     break;
                 default:
@@ -148,6 +161,21 @@ public class NumberGuessGame extends Game {
                     break;
             }
         }
+    }
+
+    private void compareDice(int diceSum, int playerGuess, double bet) {
+        if(diceSum == playerGuess){
+            console.print("You won: " + String.valueOf(bettingPayout.betPayout(bet,multiplier)) + "dollars!");
+            currentPlayer.deposit(bettingPayout.betPayout(bet,multiplier));
+        }else{
+            console.print("You won: " + String.valueOf(bettingPayout.betPayout(bet,multiplier)) + "dollars!");
+            //currentPlayer.;
+        }
+    }
+
+    private int rollDice(){
+        Dice dice = new Dice(numberOfDice);
+        return dice.rollDice(numberOfDice);
     }
 
     private int getNumberOfDice() {
