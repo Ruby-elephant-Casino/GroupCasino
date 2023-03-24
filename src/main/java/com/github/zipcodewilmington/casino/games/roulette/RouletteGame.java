@@ -262,6 +262,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
             isStartGame = false;
             return true; // set parameters to stop the game, return true to show game has exited
         }
+
         public Map<Integer, String> mapNumberToColor () {
 
             numberToColor = new HashMap<>();
