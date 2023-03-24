@@ -163,32 +163,4 @@ public class WheelOfSixGame extends Game {
             }
         }
     }
-    public void play() {
-        double bet = getBet();
-        if(bet==0.0){
-            return;
-        }
-        String guess =  getGuess();
-        String result = (wheel.spinString(0,wheelSlots.length));
-        System.out.println("The wheel landed on: " + result);
-        if (guess.equalsIgnoreCase(result)) {
-            double wins = betHandler.betPayout(bet,1,currentPlayer.getPlayerAccount(),true);
-            successConsole.println("Congratulations! You won $" + wins);
-        } else {
-            double loses = betHandler.betPayout(bet,1,currentPlayer.getPlayerAccount(),false);
-            errorConsole.println(String.format("Sorry, you lost $%.2f better luck next time!",loses));
-        }
-    }
-    private Integer w6StartGameMenu() {
-        return console.getIntegerInput(new StringBuilder()
-                .append("+---------------------------------+\n")
-                .append("|   WHEEL 6 BET TYPE SELECTION    |\n")
-                .append("+---------------------------------+\n")
-                .append("|  1. Start betting (pays 1 to 1) |\n")
-                .append("|  2. Return to previous menu     |\n")
-                .append("|  3. Exit game                   |\n")
-                .append("+---------------------------------+\n")
-                .append("SELECT A BET OPTION: ")
-                .toString());
-    }
 }
