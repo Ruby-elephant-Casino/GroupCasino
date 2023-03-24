@@ -4,12 +4,11 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.utils.Card;
 
-import java.util.ArrayList;
-import java.util.Queue;
+import java.util.*;
 
 public class WarPlayer extends Player {
     Card currentCard;
-    Queue<Card> cardDeck;
+    Queue<Card> cardDeck = new LinkedList<>();
 
     public WarPlayer(CasinoAccount playerAccount) {
         super(playerAccount);
@@ -30,9 +29,8 @@ public class WarPlayer extends Player {
         return getCurrentCard();
     }
 
-    public Queue<Card> addCardsToDeck(Card card){
+    public void addCardsToDeck(Card card){
         this.cardDeck.add(card);
-        return cardDeck;
     }
 
     public void addWinnings(ArrayList<Card> winnings){
@@ -46,5 +44,8 @@ public class WarPlayer extends Player {
                 return getCurrentCard();
             }
         return getCurrentCard();
+    }
+    public Queue<Card> getCardDeck(){
+        return cardDeck;
     }
 }

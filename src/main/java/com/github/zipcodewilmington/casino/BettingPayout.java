@@ -25,8 +25,9 @@ public class BettingPayout {
     public boolean checkBetAgainstBalance(double bet, double currentBalance){
         return bet <= currentBalance;
     }
-    public double betPayout(double bet, double multiplier, CasinoAccount account, boolean isWon){
-        if(isWon){
+
+    public double betPayout(double bet, double multiplier, CasinoAccount account, boolean isWon) {
+        if (isWon) {
             Double newBalance = account.getBalance() + (bet * multiplier);
             account.setBalance(newBalance);
             return (bet * multiplier);
@@ -34,6 +35,11 @@ public class BettingPayout {
         Double newBalance = account.getBalance() - bet;
         account.setBalance(newBalance);
         return bet;
+    }
+
+    public double betPayout(double bet, double multiplier){
+        return (bet * multiplier);
+
     }
     public boolean checkBet(double bet){
         return (checkMin(bet) && checkMax(bet));
