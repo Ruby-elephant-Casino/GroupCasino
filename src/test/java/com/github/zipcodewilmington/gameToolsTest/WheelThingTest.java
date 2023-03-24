@@ -1,7 +1,8 @@
 package com.github.zipcodewilmington.gameToolsTest;
 
 import com.github.zipcodewilmington.casino.gameTools.WheelThing;
-import org.testng.annotations.Test;
+import org.junit.Test;
+
 
 import java.util.Arrays;
 import java.util.HashSet;
