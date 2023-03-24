@@ -230,8 +230,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
                     break;
 
                 case 6: // exit game completely
-                    isStartGame = false;
-                    isRunning = false;
+                    exitGame();
                     break;
 
                 default: //slots game
@@ -322,6 +321,7 @@ public class RouletteGame extends Game implements GamblingGameInterface {
                    isWon = true;
                break;
            default:
+               errorConsole.println("Invalid value entered!");
                break;
        }
        if(isWon) {
@@ -336,6 +336,11 @@ public class RouletteGame extends Game implements GamblingGameInterface {
 
     public Integer spinWheelNumber(){
        return wheel.spin(0,36);
+    }
+    public boolean exitGame(){
+       isRunning = false;
+       isStartGame = false;
+       return true; // set parameters to stop the game, return true to show game has exited
     }
     public Map<Integer,String> mapNumberToColor(){
         numberToColor = new HashMap<>();
