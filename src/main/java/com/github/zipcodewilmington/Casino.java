@@ -13,7 +13,6 @@ import com.github.zipcodewilmington.casino.games.war.WarGame;
 import com.github.zipcodewilmington.casino.games.war.WarPlayer;
 import com.github.zipcodewilmington.casino.games.wheelof6.WheelOfSixGame;
 import com.github.zipcodewilmington.casino.games.wheelof6.WheelOfSixPlayer;
-import com.github.zipcodewilmington.casino.games.wheelof6.WheelOfSixPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -164,7 +163,7 @@ public class Casino implements Runnable {
 //        } while (!"logout".equals(arcadeDashBoardInput));
     }
 
-    private String welcomeMessage() {
+    public String welcomeMessage() {
         return new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
@@ -188,20 +187,14 @@ public class Casino implements Runnable {
                 .toString());
     }
 
-    private void createNewAccount(){
+    public CasinoAccount createNewAccount() {
         console.println("Welcome to the account-creation screen.");
-        while(true){
-            String accountName = console.getStringInput("Enter your account name:");
-            if(accountManager.checkAccountName(accountName)){ // if name already exist
-                errorConsole.println("Account name already exists! Please choose another one.");
-                continue;
-            }
-            String password = console.getStringInput("Enter your password:");
-            CasinoAccount account = accountManager.createAccount(accountName, password);
-            accountManager.registerAccount(account);
-            successConsole.println("Account created successfully with balance of $0! Sending you back to the main menu!");
-            break;
-        }
+        String accountName = accountManager.askForAccountName();
+        String password = accountManager.askForPassword();
+        CasinoAccount account = accountManager.createAccount(accountName, password);
+        accountManager.registerAccount(account);
+        successConsole.println("Account created successfully with balance of $0! Sending you back to the main menu!");
+        return account;
     }
 
     private void login(){

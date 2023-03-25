@@ -1,9 +1,11 @@
 package com.github.zipcodewilmington.casinoTest;
 
+import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.HashMap;
 
@@ -89,5 +91,37 @@ public class AccountManagerTest {
         // Then
         Assert.assertTrue(cam.checkAccount(expectedName,expectedPass));
         Assert.assertFalse(cam.checkAccount(expectedName,""));
+    }
+
+    @Test
+    public void testAskForAccountName(){
+        // Given
+        Casino casino = new Casino();
+        CasinoAccountManager accountManager = Mockito.mock(CasinoAccountManager.class);
+        String accName = "newAccount";
+
+        // When
+        // inject accName when scanner input scan for string input
+        Mockito.when(accountManager.askForAccountName()).thenReturn(accName);
+        String actual = accountManager.askForAccountName();
+
+        // Then
+        Assert.assertEquals(accName,actual);
+    }
+
+    @Test
+    public void testAskForPassword(){
+        // Given
+        CasinoAccountManager accountManager = Mockito.mock(CasinoAccountManager.class);
+
+        String password = "newPassword";
+
+        // When
+        // inject password when scanner input scan for string input
+        Mockito.when(accountManager.askForPassword()).thenReturn(password);
+        String actual = accountManager.askForPassword();
+
+        // Then
+        Assert.assertEquals(password,actual);
     }
 }

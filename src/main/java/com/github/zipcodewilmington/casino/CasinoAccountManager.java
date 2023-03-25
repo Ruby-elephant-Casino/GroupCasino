@@ -1,5 +1,8 @@
 package com.github.zipcodewilmington.casino;
 
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
+
 import java.io.*;
 import java.util.HashMap;
 
@@ -9,12 +12,21 @@ import java.util.HashMap;
  * it is advised that every instruction in this class is logged
  */
 public class CasinoAccountManager {
+    // all consoles
+    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
+    private final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
+
     private HashMap<String,CasinoAccount> accountMap;
+
+    // constructor
     public CasinoAccountManager(){
         accountMap = new HashMap<>();
         getAllAccounts();
     }
 
+
+    // getter and setter
     public HashMap<String, CasinoAccount> getAccountMap() {
         return accountMap;
     }
@@ -23,6 +35,7 @@ public class CasinoAccountManager {
         this.accountMap = accountMap;
     }
 
+    // File IO to keep all accounts saved and able to access when program runs or exits
     public void getAllAccounts(){
         BufferedReader bufferedReader;
         try{
@@ -56,6 +69,7 @@ public class CasinoAccountManager {
         }
     }
 
+    // get account
     public CasinoAccount getAccount(String accountName, String accountPassword) {
         return accountMap.get(accountName);
 //        String currentMethodName = new Object(){}.getClass().getEnclosingMethod().getName();
@@ -66,6 +80,21 @@ public class CasinoAccountManager {
 
     public CasinoAccount createAccount(String accountName, String accountPassword) {
         return new CasinoAccount(accountName,accountPassword);
+    }
+
+    public String askForAccountName(){
+        while(true) {
+            String accountName = console.getStringInput("Enter your account name:");
+            if (checkAccountName(accountName)) { // if name already exist
+                errorConsole.println("Account name already exists! Please choose another one.");
+            } else {
+                return accountName;
+            }
+        }
+    }
+
+    public String askForPassword(){
+        return console.getStringInput("Enter your password:");
     }
 
     public boolean checkAccountName(String accountName){
