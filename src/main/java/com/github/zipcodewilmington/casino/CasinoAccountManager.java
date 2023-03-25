@@ -93,7 +93,7 @@ public class CasinoAccountManager {
         return new CasinoAccount(accountName,accountPassword);
     }
 
-    public String askForAccountName(){
+    public String askForNewAccountName(){
         while(true) {
             String accountName = console.getStringInput("Enter your account name:");
             if (checkAccountName(accountName)) { // if name already exist
@@ -104,7 +104,7 @@ public class CasinoAccountManager {
         }
     }
 
-    public String askForPassword(){
+    public String askForNewPassword(){
         return console.getStringInput("Enter your password:");
     }
 
