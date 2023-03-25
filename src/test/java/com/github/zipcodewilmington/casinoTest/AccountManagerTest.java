@@ -1,17 +1,14 @@
 package com.github.zipcodewilmington.casinoTest;
 
-import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.utils.IOConsole;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class AccountManagerTest {
@@ -139,7 +136,7 @@ public class AccountManagerTest {
         // When
         // inject accName when scanner input scan for string input
         Mockito.when(console.getStringInput(Mockito.anyString())).thenReturn(accName);
-        String actual = accountManager.askForAccountName();
+        String actual = accountManager.askForNewAccountName();
 
         // Then
         Assert.assertEquals(accName,actual);
@@ -156,7 +153,7 @@ public class AccountManagerTest {
         // When
         // inject password when scanner input scan for string input
         Mockito.when(console.getStringInput(Mockito.anyString())).thenReturn(password);
-        String actual = accountManager.askForPassword();
+        String actual = accountManager.askForNewPassword();
 
         // Then
         Assert.assertEquals(password,actual);

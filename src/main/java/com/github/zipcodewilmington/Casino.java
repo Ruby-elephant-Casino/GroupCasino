@@ -21,8 +21,8 @@ import com.github.zipcodewilmington.utils.IOConsole;
  */
 public class Casino implements Runnable {
     // all consoles
-    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
-    private final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
+    private IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private IOConsole errorConsole = new IOConsole(AnsiColor.RED);
     private final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
 
     // fields of acccount and accoutManager
@@ -42,6 +42,15 @@ public class Casino implements Runnable {
     public void setAccountManager(CasinoAccountManager accountManager) {
         this.accountManager = accountManager;
     }
+
+    public void setConsole(IOConsole console) {
+        this.console = console;
+    }
+
+    public void setErrorConsole(IOConsole errorConsole) {
+        this.errorConsole = errorConsole;
+    }
+
 
 
     @Override
@@ -170,7 +179,7 @@ public class Casino implements Runnable {
                 .toString();
     }
 
-    private Integer lobbyMenu(){
+    public Integer lobbyMenu(){
         return console.getIntegerInput(new StringBuilder()
                 .append("+-------------------------------+\n")
                 .append("|         MAIN  MENU            |\n")
@@ -189,8 +198,8 @@ public class Casino implements Runnable {
 
     public CasinoAccount createNewAccount() {
         console.println("Welcome to the account-creation screen.");
-        String accountName = accountManager.askForAccountName();
-        String password = accountManager.askForPassword();
+        String accountName = accountManager.askForNewAccountName();
+        String password = accountManager.askForNewPassword();
         CasinoAccount account = accountManager.createAccount(accountName, password);
         accountManager.registerAccount(account);
         successConsole.println("Account created successfully with balance of $0! Sending you back to the main menu!");
@@ -199,35 +208,45 @@ public class Casino implements Runnable {
 
     private void login(){
         console.println("Welcome to the log-in screen.");
-        while(true){
-            String accountName = console.getStringInput("Enter your account name:");
-            // if name not already in DB
-            if(!accountManager.checkAccountName(accountName)){
-                errorConsole.println("Account name is not recognized!");
-                String createAcc = console.getStringInput("Do you want to create a new account? (Y | N | retry) : ");
-                if(createAcc.equalsIgnoreCase("Y")){
-                    createNewAccount();
-                    return;
-                } else if(createAcc.equalsIgnoreCase("N")){
-                    successConsole.println("You are directed back to the main menu!");
-                    return;
-                }
-                continue;
+            String accountName = getAccountNameForLogIn();
+            if(accountName.equalsIgnoreCase("exit")){ // if name not already in DB
+                return;
             }
-            String password = console.getStringInput("Enter your password:");
-            if(accountManager.checkAccount(accountName,password)){
+            String password = getPasswordForLogIn(accountName);
+            if(!password.equalsIgnoreCase("exit")){
                 CasinoAccount account = accountManager.getAccount(accountName, password);
                 currentAccount = account;
                 successConsole.println("Account logged in successfully!");
                 successConsole.println(String.format("Hello %s, you have %.2f in your account!",
                         currentAccount.getName().toUpperCase(),
                         currentAccount.getBalance()));
-                break;
+            }
+    }
+    public String getAccountNameForLogIn() {
+        while(true){
+            String accountName = console.getStringInput("Enter your account name or 'exit':");
+            // if name not already in DB
+            if(accountName.equalsIgnoreCase("exit")){
+                return "exit";
+            } else if (!accountManager.checkAccountName(accountName)) {
+                errorConsole.println("Account not found, please try again.");
+            } else {
+                return accountName;
+            }
+        }
+    }
+
+    public String getPasswordForLogIn(String accountName) {
+        while(true){
+            String password = console.getStringInput("Enter your password or 'exit' to exit:");
+            if(password.equalsIgnoreCase("exit")){
+                return "exit";
+            } else if(accountManager.checkAccount(accountName,password)){
+                return password;
             }
             errorConsole.println("Password is incorrect, please try again!");
         }
     }
-
 //    private void showBalance(){
 //        boolean isInBalanceMenu = true;
 //        while(isInBalanceMenu){
@@ -334,7 +353,7 @@ public class Casino implements Runnable {
         }
     }
 
-    private Integer gameMenu(){
+    public Integer gameMenu(){
         return console.getIntegerInput(new StringBuilder()
                 .append("+-----------------------+\n")
                 .append("|      GAMES MENU       |\n")
