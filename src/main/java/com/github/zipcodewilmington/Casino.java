@@ -47,11 +47,13 @@ public class Casino implements Runnable {
         this.console = console;
     }
 
-    public void setErrorConsole(IOConsole errorConsole) {
-        this.errorConsole = errorConsole;
+    public CasinoAccount getCurrentAccount() {
+        return currentAccount;
     }
 
-
+    public void setCurrentAccount(CasinoAccount currentAccount) {
+        this.currentAccount = currentAccount;
+    }
 
     @Override
     public void run() {
