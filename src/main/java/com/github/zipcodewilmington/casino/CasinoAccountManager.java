@@ -13,9 +13,9 @@ import java.util.HashMap;
  */
 public class CasinoAccountManager {
     // all consoles
-    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private IOConsole console = new IOConsole(AnsiColor.BLUE);
     private final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
-    private final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
+    private File dbFile = new File("accountDB.txt");
 
     private HashMap<String,CasinoAccount> accountMap;
 
@@ -27,6 +27,19 @@ public class CasinoAccountManager {
 
 
     // getter and setter
+
+    public void setConsole(IOConsole console) {
+        this.console = console;
+    }
+
+    public File getDbFile() {
+        return dbFile;
+    }
+
+    public void setDbFile(File dbFile) {
+        this.dbFile = dbFile;
+    }
+
     public HashMap<String, CasinoAccount> getAccountMap() {
         return accountMap;
     }
@@ -36,10 +49,10 @@ public class CasinoAccountManager {
     }
 
     // File IO to keep all accounts saved and able to access when program runs or exits
-    public void getAllAccounts(){
+    public boolean getAllAccounts() {
         BufferedReader bufferedReader;
         try{
-            bufferedReader = new BufferedReader(new FileReader("accountDB.txt"));
+            bufferedReader = new BufferedReader(new FileReader(dbFile));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] items = line.split(",");
@@ -47,23 +60,21 @@ public class CasinoAccountManager {
                 accountMap.put(items[0],account);
             }
             bufferedReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File 'accountDB.txt' is not found!");
+            return true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public void saveAllAccounts(){
+    public boolean saveAllAccounts(){
         BufferedWriter bufferedWriter;
         try{
-            bufferedWriter = new BufferedWriter(new FileWriter("accountDB.txt"));
+            bufferedWriter = new BufferedWriter(new FileWriter(dbFile));
             for(CasinoAccount account : accountMap.values()){
                 bufferedWriter.write(account.getName()+","+account.getPassword()+","+account.getBalance());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File 'accountDB.txt' is not found!");
+            return true;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

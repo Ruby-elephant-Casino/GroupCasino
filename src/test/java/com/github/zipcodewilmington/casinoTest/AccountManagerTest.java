@@ -3,10 +3,15 @@ package com.github.zipcodewilmington.casinoTest;
 import com.github.zipcodewilmington.Casino;
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
+import com.github.zipcodewilmington.utils.IOConsole;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class AccountManagerTest {
@@ -33,6 +38,36 @@ public class AccountManagerTest {
         Assert.assertEquals(expected,cam.getAccountMap());
     }
 
+    @Test
+    public void testSetDBFile(){
+        // Given
+        CasinoAccountManager cam = new CasinoAccountManager();
+        File expected = new File("");
+
+        // When
+        cam.setDbFile(expected);
+
+        // Then
+        Assert.assertEquals(expected,cam.getDbFile());
+    }
+
+    @Test
+    public void testGetAccount(){
+        // Given
+        CasinoAccountManager cam = new CasinoAccountManager();
+        String expectedName = "Woo";
+        String expectedPassword = "Hoo";
+        Double expectedBalance = 0.0;
+
+        // When
+        CasinoAccount expected = cam.createAccount(expectedName,expectedPassword);
+        cam.registerAccount(expected);
+        CasinoAccount actual = cam.getAccount(expectedName,expectedPassword);
+
+        // Then
+        Assert.assertEquals(expected,actual);
+
+    }
     @Test
     public void testCreateAccount(){
         // Given
@@ -96,13 +131,14 @@ public class AccountManagerTest {
     @Test
     public void testAskForAccountName(){
         // Given
-        Casino casino = new Casino();
-        CasinoAccountManager accountManager = Mockito.mock(CasinoAccountManager.class);
+        IOConsole console = Mockito.mock(IOConsole.class);
+        CasinoAccountManager accountManager = new CasinoAccountManager();
+        accountManager.setConsole(console);
         String accName = "newAccount";
 
         // When
         // inject accName when scanner input scan for string input
-        Mockito.when(accountManager.askForAccountName()).thenReturn(accName);
+        Mockito.when(console.getStringInput(Mockito.anyString())).thenReturn(accName);
         String actual = accountManager.askForAccountName();
 
         // Then
@@ -112,16 +148,64 @@ public class AccountManagerTest {
     @Test
     public void testAskForPassword(){
         // Given
-        CasinoAccountManager accountManager = Mockito.mock(CasinoAccountManager.class);
-
+        IOConsole console = Mockito.mock(IOConsole.class);
+        CasinoAccountManager accountManager = new CasinoAccountManager();
+        accountManager.setConsole(console);
         String password = "newPassword";
 
         // When
         // inject password when scanner input scan for string input
-        Mockito.when(accountManager.askForPassword()).thenReturn(password);
+        Mockito.when(console.getStringInput(Mockito.anyString())).thenReturn(password);
         String actual = accountManager.askForPassword();
 
         // Then
         Assert.assertEquals(password,actual);
     }
+
+    @Test
+    public void testGetAccounts(){
+        // Given
+        CasinoAccountManager cam = new CasinoAccountManager();
+
+        // When
+        Boolean actual = cam.getAllAccounts();
+        // Then
+        Assert.assertTrue(actual);
+    }
+    @Test
+    public void testGetAccountsThrow(){
+        // Given
+        CasinoAccountManager cam = new CasinoAccountManager();
+
+        // When
+        cam.setDbFile(new File(""));
+
+        // Then
+        Assertions.assertThrows(RuntimeException.class,
+                ()->{cam.getAllAccounts();});
+    }
+
+    @Test
+    public void testSaveAccounts(){
+        // Given
+        CasinoAccountManager cam = new CasinoAccountManager();
+
+        // When
+        Boolean actual = cam.saveAllAccounts();
+        // Then
+        Assert.assertTrue(actual);
+    }
+    @Test
+    public void testSaveAccountsThrow(){
+        // Given
+        CasinoAccountManager cam = new CasinoAccountManager();
+
+        // When
+        cam.setDbFile(new File(""));
+
+        // Then
+        Assertions.assertThrows(RuntimeException.class,
+                ()->{cam.saveAllAccounts();});
+    }
+
 }
