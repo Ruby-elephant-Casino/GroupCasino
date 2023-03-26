@@ -143,6 +143,24 @@ public class AccountManagerTest {
     }
 
     @Test
+    public void testAskForAccountName2(){
+        // Given
+        IOConsole console = Mockito.mock(IOConsole.class);
+        CasinoAccountManager accountManager = new CasinoAccountManager();
+        accountManager.setConsole(console);
+        String accName = "newAccount";
+
+        // When
+        // inject accName when scanner input scan for string input
+        // make sure "whitney" accName is in data base to cover the error check!!!
+        Mockito.when(console.getStringInput(Mockito.anyString())).thenReturn("whitney",accName);
+        String actual = accountManager.askForNewAccountName();
+
+        // Then
+        Assert.assertEquals(accName,actual);
+    }
+
+    @Test
     public void testAskForPassword(){
         // Given
         IOConsole console = Mockito.mock(IOConsole.class);
@@ -165,7 +183,7 @@ public class AccountManagerTest {
         CasinoAccountManager cam = new CasinoAccountManager();
 
         // When
-        Boolean actual = cam.getAllAccounts();
+        boolean actual = cam.getAllAccounts();
         // Then
         Assert.assertTrue(actual);
     }
@@ -188,7 +206,7 @@ public class AccountManagerTest {
         CasinoAccountManager cam = new CasinoAccountManager();
 
         // When
-        Boolean actual = cam.saveAllAccounts();
+        boolean actual = cam.saveAllAccounts();
         // Then
         Assert.assertTrue(actual);
     }

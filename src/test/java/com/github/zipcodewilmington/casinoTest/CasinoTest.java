@@ -273,7 +273,7 @@ public class CasinoTest {
         IOConsole console = Mockito.mock(IOConsole.class);
         casino.setConsole(console);
 
-        // mock user input to select menu option 1 then 7
+        // mock user input to select menu option 2 then 7
         Mockito.when(console.getIntegerInput(Mockito.anyString())).thenReturn(2,7);
 
         // execute the lobbyMenu() method
