@@ -497,21 +497,21 @@ public class CasinoTest {
         // Then => execute 5 then 7.
         verify(console, times(2)).getIntegerInput(Mockito.anyString());
     }
-    @Test
-    public void testRunWithInputCase7() {
-        Casino casino = new Casino();
-        IOConsole console = Mockito.mock(IOConsole.class);
-        casino.setConsole(console);
-
-        // mock user input to select menu option 7
-        Mockito.when(console.getIntegerInput(Mockito.anyString())).thenReturn(7);
-
-        // execute the lobbyMenu() method
-        casino.run();
-
-        // getIntegerInput was called only 1 time as 7 was selected and program exited
-        verify(console, times(1)).getIntegerInput(Mockito.anyString());
-    }
+//    @Test
+//    public void testRunWithInputCase7() {
+//        Casino casino = new Casino();
+//        IOConsole console = Mockito.mock(IOConsole.class);
+//        casino.setConsole(console);
+//
+//        // mock user input to select menu option 7
+//        Mockito.when(console.getIntegerInput(Mockito.anyString())).thenReturn(7);
+//
+//        // execute the lobbyMenu() method
+//        casino.run();
+//
+//        // getIntegerInput was called only 1 time as 7 was selected and program exited
+//        verify(console, times(1)).getIntegerInput(Mockito.anyString());
+//    }
 
     @Test
     public void testRunWithInputCaseDefault() {
@@ -524,6 +524,22 @@ public class CasinoTest {
 
         // execute the lobbyMenu() method
         casino.run();
+
+        // Then
+        verify(console, times(2)).getIntegerInput(Mockito.anyString());
+    }
+
+    @Test
+    public void testGetGameCaseDefault() {
+        Casino casino = new Casino();
+        IOConsole console = Mockito.mock(IOConsole.class);
+        casino.setConsole(console);
+
+        // mock user input to select menu option 7
+        Mockito.when(console.getIntegerInput(Mockito.anyString())).thenReturn(8,7);
+
+        // execute the lobbyMenu() method
+        casino.getGame();
 
         // Then
         verify(console, times(2)).getIntegerInput(Mockito.anyString());

@@ -29,7 +29,7 @@ public class NumberGuessGame extends Game {
 
     @Override
     public void remove(Player player) {
-
+        this.currentPlayer = null;
     }
 
     @Override

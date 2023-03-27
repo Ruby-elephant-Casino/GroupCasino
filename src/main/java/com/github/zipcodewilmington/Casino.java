@@ -299,7 +299,7 @@ public class Casino implements Runnable {
 //                .toString());
 //    }
 
-    private void getGame() {
+    public void getGame() {
         boolean isGettingGame = true;
         console.println("Welcome to the Game Selection Dashboard!");
         while(isGettingGame){

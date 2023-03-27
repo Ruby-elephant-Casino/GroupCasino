@@ -10,27 +10,27 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 public class NumberguessTest {
-//    @Test
-//    public void add() {
-//        // Arrange
-//
-//        NumberGuessPlayer player = new NumberGuessPlayer(new CasinoAccount());
-//
-//        NumberGuessGame game = new NumberGuessGame();
-//        game.add(player);
-//        assertNotNull(game.getCurrentPlayer());
-//
-//    }
-//
-//
-//    @Test
-//    public void remove() {
-//        NumberGuessPlayer player = new NumberGuessPlayer(new CasinoAccount());
-//
-//        NumberGuessGame game = new NumberGuessGame();
-//        game.add(player);
-//        game.remove(player);
-//        assertNull(game.getCurrentPlayer());
-//
-//    }
+    @Test
+    public void add() {
+        // Arrange
+
+        NumberGuessPlayer player = new NumberGuessPlayer(new CasinoAccount());
+
+        NumberGuessGame game = new NumberGuessGame();
+        game.add(player);
+        assertNotNull(game.getCurrentPlayer());
+
+    }
+
+
+    @Test
+    public void remove() {
+        NumberGuessPlayer player = new NumberGuessPlayer(new CasinoAccount());
+
+        NumberGuessGame game = new NumberGuessGame();
+        game.add(player);
+        game.remove(player);
+        assertNull(game.getCurrentPlayer());
+
+    }
 }
