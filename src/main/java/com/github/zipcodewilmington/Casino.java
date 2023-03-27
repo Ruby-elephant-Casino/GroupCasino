@@ -111,6 +111,7 @@ public class Casino implements Runnable {
                 // go to lounge
                 case 5:
                     if(currentAccount!=null){
+                        successConsole.println("Lounge construction is still in progress! Come back later");
                     } else {
                         errorConsole.println("Please log in before execute this option");
                     }
@@ -208,7 +209,7 @@ public class Casino implements Runnable {
         return account;
     }
 
-    private void login(){
+    public void login(){
         console.println("Welcome to the log-in screen.");
             String accountName = getAccountNameForLogIn();
             if(accountName.equalsIgnoreCase("exit")){ // if name not already in DB
@@ -371,7 +372,7 @@ public class Casino implements Runnable {
                 .append("SELECT A NUMBER: ")
                 .toString());
     }
-    private void play(Object gameObject, Object playerObject) throws InterruptedException {
+    public void play(Object gameObject, Object playerObject) throws InterruptedException {
         Game game = (Game) gameObject;
         Player player = (Player) playerObject;
         game.add(player);

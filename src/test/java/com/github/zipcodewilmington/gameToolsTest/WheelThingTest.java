@@ -16,15 +16,15 @@ public class WheelThingTest {
 
 
     @Test
-    void testSpinReturnsValidValue() {
+    public void testSpinReturnsValidValue() {
         String[] wheelSlots = {"cherry", "lemon", "orange", "plum", "bell", "bar"};
         WheelThing wheel = new WheelThing(wheelSlots);
         Set<String> validValues = new HashSet<>(Arrays.asList(wheelSlots));
-        assertTrue(validValues.contains(wheel.spinString(0,wheelSlots.length-1)));
+        assertTrue(validValues.contains(wheel.spinString(0,wheelSlots.length)));
     }
 
     @Test
-    void testEmptyWheel() {
+    public void testEmptyWheel() {
         String[] wheelSlots = {};
         WheelThing wheel = new WheelThing(wheelSlots);
 
