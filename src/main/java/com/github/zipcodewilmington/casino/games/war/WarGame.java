@@ -10,12 +10,12 @@ import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Queue;
 
 
 public class WarGame extends Game {
     WarPlayer currentPlayer;
     WarPlayer dealerPlayer = new WarPlayer(null);
-    StringBuilder sb = new StringBuilder();
     ArrayList<Card> potentialWinnings = new ArrayList<>();
     ArrayList<Card> newDeck = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class WarGame extends Game {
     private void warMainMenu() {
         boolean isRunning = true;
         while(isRunning){
-            sb.setLength(0);
+            StringBuilder sb = new StringBuilder();
             Integer choice = console.getIntegerInput(sb
                     .append("+-------------------------------+\n")
                     .append("|              WAR              |\n")
@@ -75,9 +75,9 @@ public class WarGame extends Game {
     @Override
     public void startGame() {
         boolean isPlaying = true;
-        dealCards();
+        dealCards(currentPlayer, dealerPlayer);
         while(isPlaying) {
-            sb.setLength(0);
+            StringBuilder sb = new StringBuilder();
             Integer choice = console.getIntegerInput(sb
                     .append("+-------------------------------+\n")
                     .append("|              WAR              |\n")
@@ -92,7 +92,7 @@ public class WarGame extends Game {
                 case 1:
                     potentialWinnings.add(currentPlayer.flipCard());
                     potentialWinnings.add(dealerPlayer.flipCard());
-                    compareCards(currentPlayer.getCurrentCard(), dealerPlayer.getCurrentCard());
+                    compareCards(currentPlayer, dealerPlayer, potentialWinnings);
                     break;
                 case 2:
                     remove(currentPlayer);
@@ -102,11 +102,10 @@ public class WarGame extends Game {
                     console.println("Pick a viable choice!");
                     break;
             }
-
         }
     }
 
-    public void dealCards(){
+    public int dealCards(WarPlayer currentPlayer, WarPlayer dealerPlayer){
         CardDeck cardDeck = new CardDeck();
         newDeck = cardDeck.createCardDeck();
         Collections.shuffle(newDeck);
@@ -118,34 +117,33 @@ public class WarGame extends Game {
                 dealerPlayer.addCardsToDeck(dealingDeck[i]);
             }
         }
+        return currentPlayer.getCardDeck().size();
     }
-    public void compareCards(Card playerCard, Card dealerCard){
-        if(playerCard.getRank().ordinal() > dealerCard.getRank().ordinal()){
+    public boolean compareCards(WarPlayer currentPlayer, WarPlayer dealerPlayer, ArrayList<Card> potentialWinnings){
+        StringBuilder sb = new StringBuilder();
+        boolean playerWins = true;
+        if(currentPlayer.getCurrentCard().getRank().ordinal() > dealerPlayer.getCurrentCard().getRank().ordinal()){
             //player is winner, add the cards to their deck
-            console.println(printWinnings(potentialWinnings, currentPlayer, currentPlayer.currentCard, dealerPlayer.currentCard));
-            currentPlayer.addWinnings(potentialWinnings);
-            console.println(printPlayerCardAmount());
-            potentialWinnings.clear();
-        }else if(playerCard.getRank().ordinal() < dealerCard.getRank().ordinal()){
+            console.println(printWinnings(potentialWinnings, true, currentPlayer, dealerPlayer));
+        }else if(currentPlayer.getCurrentCard().getRank().ordinal() < dealerPlayer.getCurrentCard().getRank().ordinal()){
             //dealer wins, add the cards to their deck
-            console.println(printWinnings(potentialWinnings, dealerPlayer, currentPlayer.currentCard, dealerPlayer.currentCard));
-            dealerPlayer.addWinnings(potentialWinnings);
-            console.println(printPlayerCardAmount());
-            potentialWinnings.clear();
+            playerWins = false;
+            console.println(printWinnings(potentialWinnings, false, currentPlayer, dealerPlayer));
         }else{
             //WarTime
             sb.append("\nIT'S WAR TIME!!!!!\n\nYou had a ")
-                    .append(playerCard.getRank())
+                    .append(currentPlayer.getCurrentCard().getRank())
                     .append(" OF ")
-                    .append(playerCard.getSuit())
+                    .append(currentPlayer.getCurrentCard().getSuit())
                     .append("\nOpponent had a ")
-                    .append(dealerCard.getRank())
+                    .append(dealerPlayer.getCurrentCard().getRank())
                     .append(" OF ")
-                    .append(dealerCard.getSuit())
+                    .append(dealerPlayer.getCurrentCard().getSuit())
                     .append("\n");
             console.println(sb.toString());
             warTime();
         }
+        return playerWins;
     }
 
     public void warTime(){
@@ -155,21 +153,21 @@ public class WarGame extends Game {
             potentialWinnings.add(dealerPlayer.warTime());
         }
         //compare the last played card
-        compareCards(currentPlayer.currentCard, dealerPlayer.currentCard);
+        compareCards(currentPlayer, dealerPlayer, potentialWinnings);
     }
 
-    public String printWinnings(ArrayList<Card> winnings, Player winner, Card card, Card card2){
-        sb.setLength(0);
-        if(currentPlayer.equals(winner)){
+    public String printWinnings(ArrayList<Card> winnings, boolean playerWins, WarPlayer currentPlayer, WarPlayer dealerPlayer){
+        StringBuilder sb = new StringBuilder();
+        if(playerWins){
             sb.append("You won with a ")
-                    .append(card.getRank())
+                    .append(currentPlayer.currentCard.getRank())
                     .append(" OF ")
-                    .append(card.getSuit());
-        }else if(dealerPlayer.equals(winner)){
+                    .append(currentPlayer.currentCard.getSuit());
+        }else{
             sb.append("Opponent won with a ")
-                    .append(card2.getRank())
+                    .append(dealerPlayer.currentCard.getRank())
                     .append(" OF ")
-                    .append(card2.getSuit());
+                    .append(dealerPlayer.currentCard.getSuit());
         }
         if(winnings.size()>2){
             sb.append(" and they won the ");
@@ -181,21 +179,41 @@ public class WarGame extends Game {
             }
             sb.append("in the war.");
         }
-        if(currentPlayer.equals(winner)){
-            sb.append("\nOpponent lost with a " + card2.getRank() + " OF " + card2.getSuit());
-        }else if(dealerPlayer.equals(winner)){
-            sb.append("\nYou lost with a " + card.getRank() + " OF " + card.getSuit());
+        if(playerWins){
+            sb.append("\nOpponent lost with a ")
+                    .append(dealerPlayer.currentCard.getRank())
+                    .append(" OF ")
+                    .append(dealerPlayer.currentCard.getSuit());
+            addWinnings(true, currentPlayer, dealerPlayer, winnings);
+        }else {
+            sb.append("\nYou lost with a ")
+                    .append(currentPlayer.currentCard.getRank())
+                    .append(" OF ")
+                    .append(currentPlayer.currentCard.getSuit());
+            addWinnings(false, currentPlayer, dealerPlayer, winnings);
         }
 
         return sb.toString();
     }
 
-    public String printPlayerCardAmount(){
-        sb.setLength(0);
+    public String printPlayerCardAmount(WarPlayer currentPlayer){
+        StringBuilder sb = new StringBuilder();
         sb.append("\n\nPlayer has ")
                 .append(currentPlayer.getCardDeck().size())
                 .append(" cards in their deck.\n");
         return sb.toString();
+    }
+
+    public boolean addWinnings(boolean playerWins, WarPlayer currentPlayer, WarPlayer dealerPlayer, ArrayList<Card> potentialWinnings){
+        if(playerWins){
+            currentPlayer.addWinnings(potentialWinnings);
+        }else{
+            dealerPlayer.addWinnings(potentialWinnings);
+        }
+        console.println(printPlayerCardAmount(currentPlayer));
+        potentialWinnings.clear();
+
+        return playerWins;
     }
 
     public WarPlayer getCurrentPlayer() {
