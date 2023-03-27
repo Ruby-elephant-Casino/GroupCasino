@@ -9,8 +9,12 @@ import com.github.zipcodewilmington.utils.IOConsole;
 public class BettingPayout {
     private  double maxBet = 0;
     private  double minBet = 0;
-    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private IOConsole console = new IOConsole(AnsiColor.BLUE);
     private final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
+
+    public void setConsole(IOConsole console) {
+        this.console = console;
+    }
 
     public BettingPayout(int min, int max){
         minBet = min;
