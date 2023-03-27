@@ -15,12 +15,12 @@ public class BettingPayoutTest {
     // NEED TO FINISH 2 TESTS BELOW FOR 100% COVERAGE
 
 
-    @Test
+    //@Test
     public void testBetPayout(){ // methods with 4 params
 
     }
 
-    @Test
+    //@Test
     public void testBetPayout2(){ // method with 2 params
 
     }
@@ -51,8 +51,11 @@ public class BettingPayoutTest {
     public void testTakeBet0(){
         // Given
         BettingPayout bp = new BettingPayout(1,1);
+
+        // Mocking behavior of console in BettingPayout class
         IOConsole console = Mockito.mock(IOConsole.class);
         bp.setConsole(console);
+
         double expected = 0.0;
 
         // When

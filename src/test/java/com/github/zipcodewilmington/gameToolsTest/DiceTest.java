@@ -30,10 +30,17 @@ public class DiceTest {
         Assert.assertEquals(expected, actual);
     }
     @Test
-    public void testRolldice(){// METHODS FROM JAMES
+    public void testRollDice(){
         // Given
+        int numDice = 2;
+        Dice dice = new Dice(numDice);
 
         // When
         // Then
+        for(int i = 0; i < 100; i++){
+            int roll = dice.rollDice(numDice);
+            Assert.assertTrue(roll >= numDice
+                    && roll <= numDice*6);
+        }
     }
 }

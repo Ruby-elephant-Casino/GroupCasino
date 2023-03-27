@@ -6,7 +6,6 @@ import java.util.Random;
  *
  */
 public class Dice {
-    private int sumOfRoll = 0;
     private int numberDice = 0;
     private int numberTosses; // prob don't need
     Random toss = new Random();
@@ -21,6 +20,7 @@ public class Dice {
         return numberDice;
     }
     public int rollDice(int numDice) {
+        int sumOfRoll = 0;
         for (int i = 1; i <= numDice; i++) {
             sumOfRoll += toss.nextInt(6) + 1;
         }
