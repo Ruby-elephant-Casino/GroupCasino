@@ -25,7 +25,7 @@ public class BettingPayoutTest {
 
     }
 
-
+    //-------------------------------------------------------
     @Test
     public void testTakeBet(){
         // Given
