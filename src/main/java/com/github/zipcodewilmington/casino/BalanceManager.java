@@ -8,10 +8,6 @@ public abstract class BalanceManager {
     private static final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
     private static final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
 
-    public static IOConsole getConsole() {
-        return console;
-    }
-
     public static void setConsole(IOConsole console) {
         BalanceManager.console = console;
     }
