@@ -5,7 +5,6 @@ import com.github.zipcodewilmington.casino.BettingPayout;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.gameTools.Dice;
-import com.github.zipcodewilmington.casino.games.war.WarPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -28,6 +27,10 @@ public class NumberGuessGame extends Game {
 
     public void setConsole(IOConsole console) {
         this.console = console;
+    }
+
+    public void setBettingPayout(BettingPayout bettingPayout) {
+        this.bettingPayout = bettingPayout;
     }
 
     @Override
@@ -57,7 +60,7 @@ public class NumberGuessGame extends Game {
 
             switch(choice){
                 case 1:
-                    printBetMenu();
+                    startGame();
                     break;
                 case 2:
                     BalanceManager.showBalance(currentPlayer.getPlayerAccount());
@@ -80,10 +83,6 @@ public class NumberGuessGame extends Game {
 
     @Override
     public void startGame() {
-
-    }
-
-    public void printBetMenu() {
         isBetting = true;
         while(isBetting){
             sb.setLength(0);
@@ -194,7 +193,7 @@ public class NumberGuessGame extends Game {
         return sb.toString();
     }
 
-    private int getNumberOfDice() {
+    public int getNumberOfDice() {
         sb.setLength(0);
         sb.append("Enter the number of dice you want to use: ");
         //have to make sure they can't have negative guess
@@ -210,9 +209,5 @@ public class NumberGuessGame extends Game {
 
     public NumberGuessPlayer getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    public void setCurrentPlayer(NumberGuessPlayer currentPlayer) {
-        this.currentPlayer = currentPlayer;
     }
 }
