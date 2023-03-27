@@ -26,6 +26,9 @@ public class NumberGuessGame extends Game {
     double multiplier = 2;
     BettingPayout bettingPayout = new BettingPayout(minBet, maxBet);
 
+    public void setConsole(IOConsole console) {
+        this.console = console;
+    }
 
     @Override
     public void remove(Player player) {
@@ -60,7 +63,7 @@ public class NumberGuessGame extends Game {
                     BalanceManager.showBalance(currentPlayer.getPlayerAccount());
                     break;
                 case 3:
-                    removePlayer(currentPlayer);
+                    remove(currentPlayer);
                     exitGame();
                 default:
                     console.println("Pick a viable choice!");
@@ -73,8 +76,6 @@ public class NumberGuessGame extends Game {
     public Player add(Player player) {
         return this.currentPlayer = (NumberGuessPlayer) player;
     }
-
-    public Player removePlayer(Player player) {return currentPlayer = null;}
 
 
     @Override
