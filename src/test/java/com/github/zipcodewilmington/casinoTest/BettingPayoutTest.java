@@ -12,40 +12,19 @@ import static org.mockito.Mockito.*;
 
 public class BettingPayoutTest {
 
+    // NEED TO FINISH 2 TESTS BELOW FOR 100% COVERAGE
+
+
     @Test
-    public void testConstructor(){
+    public void testBetPayout(){ // methods with 4 params
 
     }
 
     @Test
-    public void testCheckMax(){
+    public void testBetPayout2(){ // method with 2 params
 
     }
 
-    @Test
-    public void testCheckMin(){
-
-    }
-
-    @Test
-    public void testCheckBetAgainstBalance(){
-
-    }
-
-    @Test
-    public void testBetPayout(){
-
-    }
-
-    @Test
-    public void testBetPayout2(){
-
-    }
-
-    @Test
-    public void testCheckBet(){
-
-    }
 
     @Test
     public void testTakeBet(){
@@ -65,6 +44,23 @@ public class BettingPayoutTest {
 
         // Then
         verify(console, times(3)).getDoubleInput(Mockito.anyString());
+        Assert.assertEquals(expected,actual,0.001);
+    }
+
+    @Test
+    public void testTakeBet0(){
+        // Given
+        BettingPayout bp = new BettingPayout(1,1);
+        IOConsole console = Mockito.mock(IOConsole.class);
+        bp.setConsole(console);
+        double expected = 0.0;
+
+        // When
+        Mockito.when(console.getDoubleInput(Mockito.anyString())).thenReturn(0.0);
+        double actual = bp.takeBet(1,1,1);
+
+        // Then
+        verify(console, times(1)).getDoubleInput(Mockito.anyString());
         Assert.assertEquals(expected,actual,0.001);
     }
 }
