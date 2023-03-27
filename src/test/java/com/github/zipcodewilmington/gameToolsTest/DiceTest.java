@@ -7,7 +7,7 @@ import org.junit.Test;
 // METHODS FROM JAMES
 public class DiceTest {
     @Test
-    public void testDiceConstructor(){
+    public void testDiceConstructor(){// METHODS FROM JAMES
         // Given
         int expected = 2;
         Dice dice = new Dice(expected);
@@ -18,7 +18,7 @@ public class DiceTest {
         Assert.assertEquals(expected, actual);
     }
     @Test
-    public void testSetNumberDice(){
+    public void testSetNumberDice(){// METHODS FROM JAMES
         // Given
         int numDice = 4;
         Dice dice = new Dice(numDice);
@@ -30,7 +30,7 @@ public class DiceTest {
         Assert.assertEquals(expected, actual);
     }
     @Test
-    public void testRolldice(){
+    public void testRolldice(){// METHODS FROM JAMES
         // Given
 
         // When
