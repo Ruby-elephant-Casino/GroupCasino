@@ -32,7 +32,7 @@ public class BlackJackGame extends Game {
 
     private static final int Starting_bankroll = 100;
 
-    private String getPlayerMove() {
+    public String getPlayerMove() {
 
         while (true) {
             System.out.println("Enter move (hit/stand): ");
@@ -47,7 +47,7 @@ public class BlackJackGame extends Game {
     }
 
 
-    private void dealerTurn(Dealer dealer, CardDeck deck) {
+    public void dealerTurn(Dealer dealer, CardDeck deck) {
 
         while (true) {
             System.out.println("Dealer's hand");
@@ -77,7 +77,7 @@ public class BlackJackGame extends Game {
         }
     }
 
-    private boolean playerTurn(BlackJackPlayer player, CardDeck deck) {
+    public boolean playerTurn(BlackJackPlayer player, CardDeck deck) {
         while (true) {
             String move = getPlayerMove();
 
@@ -107,7 +107,7 @@ public class BlackJackGame extends Game {
 //    {
 //        return player.getValue() == dealer.getValue();
 //    }
-    private boolean playerWins(BlackJackPlayer player, Dealer dealer) {
+    public boolean playerWins(BlackJackPlayer player, Dealer dealer) {
         if (player.busted()) {
             return false;
         }
@@ -119,7 +119,7 @@ public class BlackJackGame extends Game {
         return player.getValue() > dealer.getValue(); //checks the values of the hands
     }
 
-    private double findWinner(Dealer dealer, BlackJackPlayer player, int bet) {
+    public double findWinner(Dealer dealer, BlackJackPlayer player, int bet) {
         if (playerWins(player, dealer)) {
 
             System.out.println("Player wins!");
