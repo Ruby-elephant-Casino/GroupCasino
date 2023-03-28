@@ -17,7 +17,7 @@ public class WheelOfSixGame extends Game {
     private final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
     private WheelOfSixPlayer currentPlayer;
     private BettingPayout betHandler;
-    boolean isRunning,isStartGame;
+    boolean isRunning;
     private WheelThing wheel;
     private final String[] wheelSlots = new String[]{"cherry", "lemon", "orange", "plum", "bell", "bar"};
 
@@ -31,8 +31,7 @@ public class WheelOfSixGame extends Game {
 
 
     public double getBet() {
-        double bet = betHandler.takeBet(5, 1000, currentPlayer.getPlayerAccount().getBalance());
-        return bet;
+        return betHandler.takeBet(5, 1000, currentPlayer.getPlayerAccount().getBalance());
     }
 
     public String getGuess() {

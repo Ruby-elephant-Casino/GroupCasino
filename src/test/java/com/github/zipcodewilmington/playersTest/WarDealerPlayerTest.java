@@ -1,4 +1,4 @@
-package com.github.zipcodewilmington.gamesTest;
+package com.github.zipcodewilmington.playersTest;
 
 import com.github.zipcodewilmington.casino.gameTools.Rank;
 import com.github.zipcodewilmington.casino.gameTools.Suit;

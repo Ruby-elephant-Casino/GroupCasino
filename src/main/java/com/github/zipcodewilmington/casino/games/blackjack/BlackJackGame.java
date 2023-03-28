@@ -60,10 +60,10 @@ public class BlackJackGame extends Game {
 
             if (value < 17) {
                 System.out.println("Dealer hits");
-                Card c = deck.deal();
-                dealer.addCard(c);
+                //Card c = deck.deal();
+                //dealer.addCard(c);
 
-                System.out.println("Dealer card was " + c);
+                //System.out.println("Dealer card was " + c);
 
                 if (dealer.busted()) {
                     System.out.println("Dealer busted!");
@@ -82,9 +82,9 @@ public class BlackJackGame extends Game {
             String move = getPlayerMove();
 
             if (move.equals("hit")) {
-                Card c = deck.deal();
-                System.out.println("Your card was: " + c);
-                player.addCard(c);
+                //Card c = deck.deal();
+                //System.out.println("Your card was: " + c);
+                //player.addCard(c);
                 System.out.println("Player's hand");
                 System.out.println(player);
 

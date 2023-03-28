@@ -20,7 +20,16 @@ public class SlotsGame extends Game {
     int minBet = 5;
     int maxBet = 2000;
     BettingPayout bettingPayout = new BettingPayout(minBet, maxBet);
-    private final IOConsole console = new IOConsole(AnsiColor.PURPLE);
+    private IOConsole console = new IOConsole(AnsiColor.PURPLE);
+
+    public IOConsole getConsole() {
+        return console;
+    }
+
+    public void setConsole(IOConsole console) {
+        this.console = console;
+    }
+
     public int getSlotRoll() {
         return rand.nextInt(outcome.length);
     }

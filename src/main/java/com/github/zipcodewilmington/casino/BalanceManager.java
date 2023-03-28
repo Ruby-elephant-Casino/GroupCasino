@@ -4,9 +4,14 @@ import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 public abstract class BalanceManager {
-    private static final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private static IOConsole console = new IOConsole(AnsiColor.BLUE);
     private static final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
     private static final IOConsole successConsole = new IOConsole(AnsiColor.YELLOW);
+
+    public static void setConsole(IOConsole console) {
+        BalanceManager.console = console;
+    }
+
     public static void showBalance(CasinoAccount account){
         boolean isInBalanceMenu = true;
         while(isInBalanceMenu){
@@ -43,7 +48,7 @@ public abstract class BalanceManager {
         }
     }
 
-    private static Integer balanceMenu(){
+    public static Integer balanceMenu(){
         return console.getIntegerInput(new StringBuilder()
                 .append("+-------------------------------+\n")
                 .append("|      ACCOUNT BALANCE MENU     |\n")

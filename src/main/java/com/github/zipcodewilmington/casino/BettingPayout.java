@@ -9,8 +9,12 @@ import com.github.zipcodewilmington.utils.IOConsole;
 public class BettingPayout {
     private  double maxBet = 0;
     private  double minBet = 0;
-    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private IOConsole console = new IOConsole(AnsiColor.BLUE);
     private final IOConsole errorConsole = new IOConsole(AnsiColor.RED);
+
+    public void setConsole(IOConsole console) {
+        this.console = console;
+    }
 
     public BettingPayout(int min, int max){
         minBet = min;
@@ -52,13 +56,13 @@ public class BettingPayout {
         while(isTakingBet){
             bet = console.getDoubleInput(String.format("Enter the amount of bet (%d$ - %d$) [0 to exit] : ",minBet,maxBet));
             if(bet == 0.0){
-                return 0.0;
+                return bet;
             } else if(!checkBetAgainstBalance(bet,currentBalance)){
                 errorConsole.println("Bet exceeds balance! Please place lower bet or deposit more money!");
             } else if(!checkBet(bet)){
                 errorConsole.println("Invalid bet amount!");
             } else {
-                return bet;
+                break;
             }
         }
         return bet;
