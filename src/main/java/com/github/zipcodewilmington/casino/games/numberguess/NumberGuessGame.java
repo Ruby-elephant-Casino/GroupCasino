@@ -179,7 +179,7 @@ public class NumberGuessGame extends Game {
         return false;
     }
 
-    private int rollDice(){
+    public int rollDice(){
         Dice dice = new Dice(numberOfDice);
         return dice.rollDice(numberOfDice);
     }

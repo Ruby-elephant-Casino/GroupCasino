@@ -15,14 +15,22 @@ public class BettingPayoutTest {
     // NEED TO FINISH 2 TESTS BELOW FOR 100% COVERAGE
 
 
-    //@Test
+    @Test
     public void testBetPayout(){ // methods with 4 params
+        BettingPayout bp = new BettingPayout(5,1000);
+        CasinoAccount ca = new CasinoAccount();
+        double expected = 100.0;
+        double actual = bp.betPayout(10,10,ca,true);
+        Assert.assertEquals(expected,actual,0.001);
 
     }
 
-    //@Test
+    @Test
     public void testBetPayout2(){ // method with 2 params
-
+        BettingPayout bp = new BettingPayout(5,1000);
+        double expected = 100.0;
+        double actual = bp.betPayout(10,10);
+        Assert.assertEquals(expected,actual,0.001);
     }
 
     //-------------------------------------------------------

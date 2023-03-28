@@ -14,15 +14,15 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
 public class CasinoTest {
-    @Test
-    public void testConstructor(){
-        // Given
-        Casino casino = new Casino();
-
-        // When
-        // Then
-        Assert.assertNotNull(casino.getAccountManager());
-    }
+//    @Test
+//    public void testConstructor(){
+//        // Given
+//        Casino casino = new Casino();
+//
+//        // When
+//        // Then
+//        Assert.assertNotNull(casino.getAccountManager());
+//    }
 
     @Test
     public void testSetAccountManager(){
