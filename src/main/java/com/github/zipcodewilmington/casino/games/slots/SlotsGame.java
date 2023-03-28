@@ -75,10 +75,6 @@ public class SlotsGame extends Game {
                     playSlots = true;
                     Double money = console.getDoubleInput("Please enter money into slot machine!\nMinimum bet is " + minBet
                     + " Maximum bet is " + maxBet);
-//                    if (money > currentPlayer.getPlayerAccount().getBalance()){
-//                        console.println("Insufficient funds\nYour account balance is " + currentPlayer.getPlayerAccount().getBalance());
-//                        break;
-//                    }
                     currentPlayer.getPlayerAccount().withdraw(money);
                     console.println("$" + money + " deposited!\n" + "Your account balance is " + currentPlayer.getPlayerAccount().getBalance());
                     while (playSlots) {
@@ -132,12 +128,15 @@ public class SlotsGame extends Game {
             money = 0;
         } return money;
     }
-    private String welcomeSlots(){n new StringBuilder()
+//    public void depositBet
+
+    private String welcomeSlots(){
+        return new StringBuilder()
             .append("+-------------------------------+\n")
             .append("Ruby Slots! Are you a Winner?\n")
             .toString();
     }
-        retur
+
     private Integer slotsMenu(){
         return console.getIntegerInput(new StringBuilder()
                 .append("+-------------------------------+\n")
