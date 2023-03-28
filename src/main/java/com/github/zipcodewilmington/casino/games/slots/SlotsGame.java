@@ -14,22 +14,22 @@ import java.util.Random;
 public class SlotsGame extends Game {
     SlotsPlayer currentPlayer;
     private final String[] outcome = {"ZCW", "Bar", "cherry", "7", "bunny", "$$$"};
-    int a, b, c, d, e, f, g, h, j;
-    String x,x1, x2, y, y1, y2, z, z1, z2;
+    int a, b, c;
+    String x, y, z;
     Random rand;
     int minBet = 5;
     int maxBet = 2000;
     BettingPayout bettingPayout = new BettingPayout(minBet, maxBet);
     private IOConsole console = new IOConsole(AnsiColor.PURPLE);
-
     public IOConsole getConsole() {
         return console;
     }
-
     public void setConsole(IOConsole console) {
         this.console = console;
     }
-
+    public SlotsPlayer getCurrentPlayer(){
+        return currentPlayer;
+    }
     public int getSlotRoll() {
         return rand.nextInt(outcome.length);
     }
@@ -38,23 +38,11 @@ public class SlotsGame extends Game {
         int rollCount = 100;
         for (int i = 0; i < rollCount; i++) {
             a = getSlotRoll();
-//            b = getSlotRoll();
-//            c = getSlotRoll();
             b = getSlotRoll();
-//            e = getSlotRoll();
-//            f = getSlotRoll();
             c = getSlotRoll();
-//            h = getSlotRoll();
-//            j = getSlotRoll();
             x = outcome[a];
-//            x1 = outcome[b];
-//            x2 = outcome[c];
             y = outcome[b];
-//            y1 = outcome[e];
-//            y2 = outcome[f];
             z = outcome[c];
-//            z1 = outcome[h];
-//            z2 = outcome[j];
             System.out.printf("[  " + "  %8s  " + "  :  " + "  %8s  " + "  :  " + "  %8s  " +   "]\r", x,y,z);
             Thread.sleep(30);
         }
@@ -63,6 +51,7 @@ public class SlotsGame extends Game {
     }
     @Override
     public void remove(Player player) {
+        this.currentPlayer = null;
     }
     public void run() {
         boolean playSlots = true;
@@ -129,14 +118,12 @@ public class SlotsGame extends Game {
         } return money;
     }
 //    public void depositBet
-
     private String welcomeSlots(){
         return new StringBuilder()
             .append("+-------------------------------+\n")
             .append("Ruby Slots! Are you a Winner?\n")
             .toString();
     }
-
     private Integer slotsMenu(){
         return console.getIntegerInput(new StringBuilder()
                 .append("+-------------------------------+\n")
@@ -149,17 +136,12 @@ public class SlotsGame extends Game {
                 .append("SELECT A NUMBER: ")
                 .toString());
     }
-
     @Override
     public Player add(Player player) {
         this.currentPlayer = (SlotsPlayer)player;
         return currentPlayer;
     }
-
-
     @Override
     public void startGame() {
-
     }
-
 }
