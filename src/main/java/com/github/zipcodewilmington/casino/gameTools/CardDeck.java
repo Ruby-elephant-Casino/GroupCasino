@@ -19,4 +19,7 @@ public class CardDeck {
     public Card deal() {
         return null;
     }
+
+    public void shuffle() {
+    }
 }

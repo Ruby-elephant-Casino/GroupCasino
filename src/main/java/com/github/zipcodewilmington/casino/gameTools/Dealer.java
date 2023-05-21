@@ -11,7 +11,7 @@ public class Dealer {
 
     }
 
-    public int getValue() {
+    public static int getValue() {
         return 0;
     }
 

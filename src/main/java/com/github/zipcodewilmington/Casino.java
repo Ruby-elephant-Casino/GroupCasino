@@ -13,7 +13,6 @@ import com.github.zipcodewilmington.casino.games.war.WarGame;
 import com.github.zipcodewilmington.casino.games.war.WarPlayer;
 import com.github.zipcodewilmington.casino.games.wheelof6.WheelOfSixGame;
 import com.github.zipcodewilmington.casino.games.wheelof6.WheelOfSixPlayer;
-import com.github.zipcodewilmington.casino.games.wheelof6.WheelOfSixPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -313,7 +312,7 @@ public class Casino implements Runnable {
                     break;
                 case 4:
                     try {
-                        play(new BlackJackGame(), new BlackJackPlayer(currentAccount));
+                        play(new BlackJackGame(), new BlackJackPlayer("Player", currentAccount));
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }

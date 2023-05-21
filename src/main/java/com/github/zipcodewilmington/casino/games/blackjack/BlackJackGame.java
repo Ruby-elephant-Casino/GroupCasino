@@ -3,190 +3,157 @@ package com.github.zipcodewilmington.casino.games.blackjack;
 import com.github.zipcodewilmington.casino.Game;
 import com.github.zipcodewilmington.casino.Player;
 import com.github.zipcodewilmington.casino.gameTools.CardDeck;
-import com.github.zipcodewilmington.casino.gameTools.Dealer;
-import com.github.zipcodewilmington.utils.Card;
-
 import java.util.Scanner;
 
 
 
 public class BlackJackGame extends Game {
     Scanner scanner = new Scanner(System.in);
+    BlackJackPlayer player;
+    private final BlackJackDealerPlayer dealer = new BlackJackDealerPlayer();
+    private final CardDeck deck = new CardDeck();
+    int money;
 
-    public void initializeGame() {
-        String names;
-        System.out.println("Welcome to Blackjack!");
-        System.out.println("");
-        System.out.println("  BLACKJACK RULES: ");
-        System.out.println("	-Each player is dealt 2 cards. The dealer is dealt 2 cards with one face-up and one face-down.");
-        System.out.println("	-Cards are equal to their value with face cards being 10 and an Ace being 1 or 11.");
-        System.out.println("	-The players cards are added up for their total.");
-        System.out.println("	-Players “Hit” to gain another card from the deck. Players “Stay” to keep their current card total.");
-        System.out.println("	-Dealer “Hits” until they equal or exceed 17.");
-        System.out.println("	-The goal is to have a higher card total than the dealer without going over 21.");
-        System.out.println("	-If the player total equals the dealer total, it is a “Push” and the hand ends.");
-        System.out.println("	-Players win their bet if they beat the dealer. Players win 1.5x their bet if they get “Blackjack” which is 21.");
-        System.out.println("");
-        System.out.println("");
+//        public BlackJackGame(BlackJackPlayer player) {
+//        this.player = player;
+//}
+    private Integer BlackJackMenu() {
+        System.out.println("+-----------------------+\n");
+        System.out.println("|    BLACKJACK MENU     |\n");
+        System.out.println("+-----------------------+\n");
+        System.out.println("|  1. Start Game        |\n");
+        System.out.println("|  2. Check Balance     |\n");
+        System.out.println("|  3. Exit Game         |\n");
+        System.out.println("+-----------------------+\n");
+        System.out.println("SELECT A NUMBER: ");
+        System.out.println();
+        return scanner.nextInt();
     }
 
-    private static final int Starting_bankroll = 100;
-
-    private String getPlayerMove() {
-
+    @Override
+    public void run() throws InterruptedException {
+//        Scanner in = new Scanner(System.in);
+        System.out.println("Welcome to BlackJack!");
+//        String command;
+//        int val;
         while (true) {
-            System.out.println("Enter move (hit/stand): ");
-            String move = scanner.nextLine();
-            move = move.toLowerCase();
-
-            if (move.equals("hit") || move.equals("stand")) {
-                return move;
-            }
-            System.out.println("Please try again.");
-        }
-    }
-
-
-    private void dealerTurn(Dealer dealer, CardDeck deck) {
-
-        while (true) {
-            System.out.println("Dealer's hand");
-            System.out.println(dealer);
-
-            int value = dealer.getValue();
-            System.out.println("Dealer's hand has value " + value);
-            System.out.println("Enter to continue...");
-            scanner.nextLine();
-
-            if (value < 17) {
-                System.out.println("Dealer hits");
-                Card c = deck.deal();
-                dealer.addCard(c);
-
-                System.out.println("Dealer card was " + c);
-
-                if (dealer.busted()) {
-                    System.out.println("Dealer busted!");
-                    break;
+            int choice = BlackJackMenu();
+            switch (choice) {
+                    case 1:
+                        startGame();
+                        break;
+                    case 2:
+                        System.out.println("Your balance is: " + player.getPlayerAccount().getBalance());
+                        break;
+                    case 3:
+                        remove(player);
+                        return;
+                    default:
+                        System.out.println("Please enter a valid command");
                 }
-            } else {
-                System.out.println("Dealer stands.");
-                break;
-            }
-
-        }
-    }
-
-    private boolean playerTurn(BlackJackPlayer player, CardDeck deck) {
-        while (true) {
-            String move = getPlayerMove();
-
-            if (move.equals("hit")) {
-                Card c = deck.deal();
-                System.out.println("Your card was: " + c);
-                player.addCard(c);
-                System.out.println("Player's hand");
-                System.out.println(player);
-
-                if (player.busted()) {
-                    return true;
-                }
-            } else {
-                // If he didn't hit, player chose to stand
-                //and it means the turn is over
-                return false;
-            }
-
-        }
-    }
-
-
-
-
-    //    private boolean push(BlackJackPlayer player, DealerPlayer dealer)
-//    {
-//        return player.getValue() == dealer.getValue();
-//    }
-    private boolean playerWins(BlackJackPlayer player, Dealer dealer) {
-        if (player.busted()) {
-            return false;
-        }
-
-        if (dealer.busted()) {
-            return true;
-        }
-
-        return player.getValue() > dealer.getValue(); //checks the values of the hands
-    }
-
-    private double findWinner(Dealer dealer, BlackJackPlayer player, int bet) {
-        if (playerWins(player, dealer)) {
-
-            System.out.println("Player wins!");
-
-            if (player.hasBlackjack()) {
-                return 1.5 * bet;
-            }
-
-            return bet;
-        } else if (push(player, dealer)) {
-
-            System.out.println("You push");
-            return 0;
-        } else {
-            System.out.println("Dealer wins");
-            return -bet;
-        }
-    }
-
-    private boolean push(BlackJackPlayer player, Dealer dealer) {
-        return false;
-    }
-
-    public void run() {
-        double bankroll = Starting_bankroll;
-        System.out.println("Starting bankroll: " + bankroll);
-
-        while (true) {
-            bankroll = playRound((int) bankroll);
-            System.out.println("Would you like to play again? (Y/N)");
-            String playAgain = scanner.nextLine();
-            if (playAgain.equalsIgnoreCase("N")) {
-                break;
             }
         }
 
-        System.out.println("Thanks for playing!");
-    }
-
-    private double playRound(int bankroll) {
-        return 0;
-    }
 
 
     @Override
     public void remove(Player player) {
-
+        if (this.player == player) {
+            this.player = null;
+        }
     }
-
-//        @Override
-//        public void run () throws InterruptedException {
-//
-//        }
 
     @Override
     public Player add(Player player) {
-        return null;
+        return this.player = (BlackJackPlayer) player;
+
     }
 
-//    @Override
-//    public Player removePlayer(Player player) {
-//        return null;
-//    }
+    @Override
+    public boolean bet(Player player, int amount, int min) {
+        if (amount < min) {
+            System.out.println("10 is the minimum bet, please put some more or leave :)");
+            return false;
+        } else { //the method subtracts the amount from the player's casino account balance
+            // using the "setBalance" method, sets the "money" variable
+            player.getPlayerAccount().setBalance(player.getPlayerAccount().getBalance() - amount);
+            this.money = amount;
+            return true;
+        }
+    }
 
     @Override
     public void startGame() {
+        Scanner scanner = new Scanner(System.in);
+        String command;
+//        int value;
+        while (true) {
+            if (BlackJackPlayer.getValue() == 21 && BlackJackDealerPlayer.getValue() < 21) {
+                System.out.println("You got BlackJack! Congratulation you won!!");
+                player.getPlayerAccount().setBalance(player.getPlayerAccount().getBalance() + (money * 2));
+                break;
+            } else if (BlackJackPlayer.getValue() == 21 && BlackJackDealerPlayer.getValue() == 21) {
+                System.out.println("both losers");
+                player.getPlayerAccount().setBalance(player.getPlayerAccount().getBalance() + money);
+                break;
+            } else if (BlackJackDealerPlayer.getValue() == 21) {
+                System.out.println("Dealer got BlackJake! Loser");
+                break;
+            } else if (BlackJackDealerPlayer.getValue() > 21) {
+                System.out.println("Dealer busted! Congratulation you won");
+                player.getPlayerAccount().setBalance(player.getPlayerAccount().getBalance() + (money * 2));
+                break;
+            } else if (BlackJackPlayer.getValue() > 21) {
+                System.out.println("You looooose");
+                break;
+            }
 
+            System.out.println("+------------------------+\n");
+            System.out.println("|    BLACKJACK MENU      |\n");
+            System.out.println("+-----------------------+ \n");
+            System.out.println("| 1. Hit                 |\n");
+            System.out.println("| 1. Stand               |\n");
+            System.out.println("| 2. Check Balance       |\n");
+            System.out.println("| 3. Exit Game           |\n");
+            System.out.println("+------------------------+\n");
+            System.out.println("SELECT A NUMBER: ");
 
+            command = scanner.nextLine().trim().toLowerCase();
+            if (command.equals("1")) {
+                player.addCard(deck.deal());
+                System.out.println("Your cards: " + player + " valued at: " + BlackJackPlayer.getValue());
+                if (BlackJackPlayer.getValue() > 21) {
+                    System.out.println("You lose");
+                    break;
+                }
+            } else if (command.equals("2")) {
+                dealer.addCard(deck.deal());
+                break;
+            } else if (command.equals("3")) {
+                System.out.println("Your balance: " + player.getPlayerAccount().getBalance());
+            } else if (command.equals("4")) {
+                System.out.println("Thanks for playing!");
+                return;
+            } else {
+                System.out.println("Invalid command. Please try again.");
+            }
+        }
+
+        while (BlackJackDealerPlayer.getValue() < 17) {
+            System.out.println("Dealer hits.");
+            dealer.addCard(deck.deal());
+            System.out.println("Dealer's cards: " + dealer + " valued at: " + BlackJackDealerPlayer.getValue());
+        }
+
+        if (BlackJackDealerPlayer.getValue() > BlackJackPlayer.getValue() && BlackJackDealerPlayer.getValue() <= 21) {
+            System.out.println("Sorry you lose!");
+        } else if (BlackJackDealerPlayer.getValue() == BlackJackPlayer.getValue()) {
+            System.out.println("Dealer's cards: " + dealer + " valued at: " + BlackJackDealerPlayer.getValue());
+            System.out.println("It's a tie! Nobody wins..");
+            player.getPlayerAccount().setBalance(player.getPlayerAccount().getBalance() + money);
+        } else {
+            System.out.println("You win!");
+            player.getPlayerAccount().setBalance(player.getPlayerAccount().getBalance() + (money * 2));
+        }
     }
 }

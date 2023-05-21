@@ -55,7 +55,12 @@ public class WheelOfSixGame extends Game {
         WheelThing wheel = new WheelThing();
         wheel.Wheel(wheelSlots);
         Scanner scanner = new Scanner(System.in);
-        WheelOfSixGame game = new WheelOfSixGame(wheel, scanner);
+        WheelOfSixGame game = new WheelOfSixGame(wheel, scanner) {
+            @Override
+            public boolean bet(Player player, int amount, int min) {
+                return false;
+            }
+        };
 
         System.out.println("Welcome to the Wheel of 6!");
         System.out.println("The game is simple - just guess which of the 6 slots the wheel will land on.");
